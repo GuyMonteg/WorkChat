@@ -9,11 +9,9 @@
 *.ear
 
 # Intellij
-.idea/
-.idea/*
 *.iml
+.idea
 *.iws
-workspace.xml
 
 # Maven
 log/
