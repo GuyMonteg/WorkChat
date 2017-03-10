@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="278.0" prefWidth="509.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextField alignment="CENTER" layoutX="184.0" layoutY="53.0" prefHeight="31.0" prefWidth="310.0" promptText="email" />
+      <TextField alignment="CENTER" layoutX="184.0" layoutY="14.0" prefHeight="31.0" prefWidth="310.0" promptText="name" />
+      <Label layoutX="19.0" layoutY="14.0" prefHeight="31.0" prefWidth="133.0" text="Username">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="19.0" layoutY="53.0" prefHeight="31.0" prefWidth="133.0" text="Email">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="19.0" layoutY="94.0" prefHeight="31.0" prefWidth="133.0" text="Password">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="19.0" layoutY="137.0" prefHeight="31.0" prefWidth="133.0" text="Repeat again">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="112.0" layoutY="181.0" prefHeight="31.0" prefWidth="265.0" text="Please enter user name.">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button layoutX="314.0" layoutY="225.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="74.0" text="Cancel" />
+      <Button layoutX="394.0" layoutY="225.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="101.0" text="Register" />
+      <PasswordField alignment="CENTER" layoutX="184.0" layoutY="94.0" prefHeight="31.0" prefWidth="310.0" promptText="password" />
+      <PasswordField alignment="CENTER" layoutX="184.0" layoutY="137.0" prefHeight="31.0" prefWidth="310.0" promptText="repeat password" />
+   </children>
+</AnchorPane>
