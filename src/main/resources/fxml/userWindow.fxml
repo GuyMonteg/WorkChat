@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.canvas.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientSide.GuiController">
    <children>
-      <TextArea editable="false" layoutX="14.0" layoutY="125.0" prefHeight="540.0" prefWidth="944.0" text="Hello!">
+      <TextArea fx:id="textArea" editable="false" layoutX="14.0" layoutY="125.0" prefHeight="540.0" prefWidth="944.0" promptText="Hello!">
          <font>
             <Font name="Times New Roman Bold" size="20.0" />
          </font>
       </TextArea>
-      <TextField alignment="TOP_LEFT" layoutX="14.0" layoutY="673.0" prefHeight="85.0" prefWidth="820.0" promptText="message text">
+      <TextField fx:id="message" alignment="TOP_LEFT" layoutX="14.0" layoutY="673.0" prefHeight="85.0" prefWidth="820.0" promptText="message text">
          <font>
             <Font name="Times New Roman" size="18.0" />
          </font>
       </TextField>
-      <ScrollBar layoutX="939.0" layoutY="125.0" orientation="VERTICAL" prefHeight="540.0" prefWidth="18.0" />
-      <ScrollBar layoutX="816.0" layoutY="673.0" orientation="VERTICAL" prefHeight="85.0" prefWidth="18.0" />
       <ListView layoutX="967.0" layoutY="174.0" prefHeight="586.0" prefWidth="296.0" />
       <ScrollBar layoutX="1244.0" layoutY="174.0" orientation="VERTICAL" prefHeight="586.0" prefWidth="18.0" />
       <Button layoutX="1164.0" layoutY="23.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="98.0" text="Logout">
@@ -35,7 +35,7 @@
             <Font name="Times New Roman Bold" size="17.0" />
          </font>
       </Button>
-      <Button layoutX="842.0" layoutY="673.0" mnemonicParsing="false" prefHeight="85.0" prefWidth="116.0" text="Send">
+      <Button fx:id="send" layoutX="842.0" layoutY="673.0" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="85.0" prefWidth="116.0" text="Send">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>
