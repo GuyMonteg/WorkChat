@@ -1,10 +1,12 @@
 package clientSide;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
 import java.net.Socket;
 import java.io.*;
+import java.net.SocketException;
 
 /**
  * Created by Monteg on 11.03.2017.
@@ -28,8 +30,8 @@ public class GuiController {
         readingMessages();
         Thread readerThread = new Thread(new WaitForReading());
         readerThread.start();
+        //new SendButton().actionPerformed(event);
         new SendButton().actionPerformed(send);
-
     }
 
     public void readingMessages() {
@@ -43,23 +45,36 @@ public class GuiController {
         }
     }
 
-    public class WaitForReading implements Runnable{
+    public class WaitForReading implements Runnable {
 
         public void run() {
-            String sms;
             try {
-                while ((sms = reader.readLine()) != null) {
-                    System.out.println(sms);
-                    textArea.appendText(sms + "\n");
+                while (true) {
+                    try {
+                        final String sms = reader.readLine();
+                        //System.out.println(sms);
+                        Platform.runLater(new Runnable() {
+                            public void run() {
+                                textArea.appendText(sms + "\n");
+                            }
+                        });
+                    } catch (SocketException exp) {
+                        Platform.runLater(new Runnable() {
+                            public void run() {
+                                textArea.appendText("Error in server");
+                            }
+                        });
+                        break;
+                    }
                 }
-            } catch (IOException e) {
+            }catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
     public class SendButton extends ActionEvent {
-        public void actionPerformed(Button send) {
+        public void actionPerformed(Button send) {        //ActionEvent event
             try {
                 writer.println(message.getText());
                 writer.flush();
@@ -67,7 +82,8 @@ public class GuiController {
                 ex.printStackTrace();
             }
             message.setText("");
-            message.requestFocus();
+            //message.requestFocus();
+            //message.setFocusTraversable(true);
         }
     }
 }

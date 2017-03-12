@@ -35,10 +35,13 @@ public class ChatServer {
                 e.printStackTrace();
             }
         }
-
     }
 
-    public void go () {
+    public static void main(String[] args) {
+        new ChatServer().go();
+    }
+
+    public void go() {
         messageList = new ArrayList();
         try {
             ServerSocket serverSock = new ServerSocket(7707);
@@ -56,19 +59,15 @@ public class ChatServer {
     }
 
     public void tellEveryone(String message) {
-        Iterator iter = messageList.iterator();
-        while (iter.hasNext()) {
+        Iterator it = messageList.iterator();
+        while (it.hasNext()) {
             try {
-                PrintWriter writer = (PrintWriter) iter.next();
+                PrintWriter writer = (PrintWriter) it.next();
                 writer.println(message);
                 writer.flush();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new ChatServer().go();
     }
 }
