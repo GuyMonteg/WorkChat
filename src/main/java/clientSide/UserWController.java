@@ -1,14 +1,11 @@
 package clientSide;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyEvent;
-
 import java.net.Socket;
 import java.io.*;
-import java.net.SocketException;
 
 /**
  * Created by Monteg on 11.03.2017.
@@ -29,6 +26,14 @@ public class UserWController {
 
     @FXML
     private TextArea textArea;
+
+    @FXML
+    private Label userStatus;
+
+    @FXML
+    public void setUserStatus() {
+        userStatus.setText(Data.name);
+    }
 
     public UserWController() {
         try {

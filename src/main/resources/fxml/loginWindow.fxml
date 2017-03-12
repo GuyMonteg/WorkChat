@@ -10,28 +10,34 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="clientSide.LoginController" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientSide.LoginController">
    <children>
-      <Button fx:id="loginIn" onAction="#whenClickedLogin" layoutX="372.0" layoutY="270.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="70.0" text="Login"/>
-      <Button layoutX="19.0" layoutY="270.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="80.0" text="Register" />
+      <Button fx:id="loginIn" layoutX="353.0" layoutY="263.0" mnemonicParsing="false" onAction="#whenClickedLogin" prefHeight="38.0" prefWidth="80.0" text="Login">
+         <font>
+            <Font name="Times New Roman Bold" size="19.0" />
+         </font></Button>
+      <Button layoutX="19.0" layoutY="263.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="89.0" text="Register">
+         <font>
+            <Font name="Times New Roman Bold" size="18.0" />
+         </font></Button>
       <TextField fx:id="name" layoutX="148.0" layoutY="132.0" prefHeight="31.0" prefWidth="285.0" />
       <Label layoutX="19.0" layoutY="132.0" prefHeight="31.0" prefWidth="110.0" text="Username">
          <font>
-            <Font size="18.0" />
+            <Font name="Times New Roman Bold" size="19.0" />
          </font>
       </Label>
       <Label layoutX="19.0" layoutY="178.0" prefHeight="31.0" prefWidth="110.0" text="Password">
          <font>
-            <Font size="18.0" />
+            <Font name="Times New Roman Bold" size="19.0" />
          </font>
       </Label>
       <ImageView fitHeight="114.0" fitWidth="430.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/loginPic.png" />
          </image></ImageView>
-      <CheckBox layoutX="148.0" layoutY="217.0" mnemonicParsing="false" text="Remember me" styleClass="checkbox" />
-      <Label layoutX="367.0" layoutY="217.0" text="Seettings!" styleClass="label-settings"/>
-      <Label layoutX="172.0" layoutY="275.0" text="Connection status" styleClass="label-connection" />
+      <CheckBox layoutX="148.0" layoutY="217.0" mnemonicParsing="false" styleClass="checkbox" text="Remember me" />
+      <Label layoutX="367.0" layoutY="217.0" styleClass="label-settings" text="Seettings!" />
+      <Label layoutX="166.0" layoutY="282.0" styleClass="label-connection" text="Connection status" />
       <PasswordField fx:id="password" layoutX="148.0" layoutY="178.0" prefHeight="31.0" prefWidth="285.0" />
    </children>
 </AnchorPane>

@@ -8,6 +8,8 @@
 <?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -18,50 +20,67 @@
             <Font name="Times New Roman Bold" size="20.0" />
          </font>
       </TextArea>
-      <TextField fx:id="message" onKeyPressed="#enterPressed" alignment="TOP_LEFT" layoutX="14.0" layoutY="673.0" prefHeight="85.0" prefWidth="820.0" promptText="message text">
+      <TextField fx:id="message" alignment="TOP_LEFT" layoutX="14.0" layoutY="673.0" onKeyPressed="#enterPressed" prefHeight="86.5" prefWidth="820.0" promptText="message text">
          <font>
             <Font name="Times New Roman" size="18.0" />
          </font>
       </TextField>
-      <ListView layoutX="967.0" layoutY="174.0" prefHeight="586.0" prefWidth="296.0" />
+      <ListView layoutX="967.0" layoutY="174.0" prefHeight="586.0" prefWidth="296.0" styleClass="list-view" />
       <ScrollBar layoutX="1244.0" layoutY="174.0" orientation="VERTICAL" prefHeight="586.0" prefWidth="18.0" />
-      <Button layoutX="1164.0" layoutY="23.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="98.0" text="Logout">
-         <font>
-            <Font name="Times New Roman Bold" size="18.0" />
-         </font>
-      </Button>
-      <Button layoutX="1164.0" layoutY="69.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="98.0" text="Seettings">
-         <font>
-            <Font name="Times New Roman Bold" size="17.0" />
-         </font>
-      </Button>
-      <Button fx:id="send" layoutX="842.0" layoutY="673.0" mnemonicParsing="false" onAction="#buttonSended" onKeyPressed="#enterPressed" prefHeight="85.0" prefWidth="116.0" text="Send">
+      <Button fx:id="send" layoutX="842.0" layoutY="673.0" mnemonicParsing="false" onAction="#buttonSended" onKeyPressed="#enterPressed" prefHeight="85.0" prefWidth="116.0">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>
+         <graphic>
+            <ImageView fitHeight="69.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/20151012_eb9eb.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Button>
       <Button layoutX="1190.0" layoutY="125.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="76.0" text="Search">
          <font>
-            <Font size="16.0" />
+            <Font name="Verdana Bold Italic" size="14.0" />
          </font>
       </Button>
       <TextField layoutX="967.0" layoutY="125.0" prefHeight="41.0" prefWidth="216.0" promptText="username" />
-      <SplitMenuButton layoutX="14.0" layoutY="70.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="145.0" text="Your status">
+      <SplitMenuButton layoutX="1051.0" layoutY="17.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="145.0" text="Your status">
         <items>
           <MenuItem mnemonicParsing="false" text="Online" />
           <MenuItem mnemonicParsing="false" text="Invisible" />
             <MenuItem mnemonicParsing="false" text="Away" />
         </items>
       </SplitMenuButton>
-      <Label layoutX="14.0" layoutY="23.0" prefHeight="32.0" prefWidth="190.0" text="User name">
+      <Label fx:id="userStatus" onMouseClicked="#setUserStatus" alignment="CENTER" layoutX="16.0" layoutY="97.0" prefHeight="24.0" prefWidth="158.0" styleClass="label-username" text="User name">
          <font>
             <Font name="Times New Roman Bold Italic" size="21.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="285.0" layoutY="14.0" prefHeight="80.0" prefWidth="402.0" text="WorkChat">
+      <Label alignment="CENTER" layoutX="311.0" layoutY="3.0" prefHeight="118.0" prefWidth="423.0" text="WorkChat">
          <font>
-            <Font name="Times New Roman Bold Italic" size="72.0" />
+            <Font name="Constantia Bold Italic" size="79.0" />
          </font>
       </Label>
+      <ImageView fitHeight="74.0" fitWidth="145.0" layoutX="705.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/chat_image.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="95.0" fitWidth="127.0" layoutX="48.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/defaultUser.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="48.0" fitWidth="47.0" layoutX="1215.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/2000px-Human-gnome-session-logout.svg.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="47.0" fitWidth="47.0" layoutX="1215.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/settings-5-xxl.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

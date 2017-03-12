@@ -1,0 +1,50 @@
+.root
+{
+    -fx-font-family      : sans-serif;
+    -fx-background-color : linear-gradient(to bottom, #517fa4, #243949);
+}
+
+.button {
+    -fx-background-color : #3498db;
+    -fx-text-fill : #2C3E50;
+}
+
+.button:pressed
+{
+    -fx-background-color : SteelBlue;
+    -fx-text-fill        : white;
+}
+
+.text-field {
+    -fx-background-color : linear-gradient(to top, #ECE9E6 , #FFFFFF);
+    -fx-font-family: serif;
+    -fx-text-fill: #000C40;
+    -fx-font-size: 18;
+    -fx-display-caret:true;
+    -fx-border-color: #283048;
+    -fx-border-width:  1;
+    -fx-border-style: solid;
+}
+
+.text-area .content {
+    -fx-background-color: linear-gradient(to left, #ECE9E6 , #FFFFFF);
+    -fx-text-fill: Indigo;
+    -fx-border-color: #283048 ;
+    -fx-border-width: 1 ;
+    -fx-border-style: solid;
+
+}
+.text-area {
+    -fx-font-family: serif;
+    -fx-text-fill: #000C40;
+    -fx-font-size: 19;
+    -fx-display-caret:true;
+}
+
+.label-username {
+    -fx-text-fill: white;
+}
+
+.list-view{
+    -fx-background-color: linear-gradient(to bottom, #EDE574 , #E1F5C4);
+}

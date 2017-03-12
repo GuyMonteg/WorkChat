@@ -1,12 +1,12 @@
 .root
 {
     -fx-font-family      : sans-serif;
-    -fx-background-color : #2C3E50;
+    -fx-background-color : linear-gradient(to bottom, #517fa4, #243949);
 }
 
 .button {
-    -fx-background-color : skyblue;
-    -fx-tex-fill : #2C3E50;
+    -fx-background-color : #3498db;
+    -fx-text-fill : #000000;
 }
 
 .button:pressed
@@ -20,7 +20,7 @@
 }
 
 .label-settings {
-    -fx-text-fill : DodgerBlue;
+    -fx-text-fill : #00c6ff;
 }
 
 .label-connection {
@@ -32,5 +32,9 @@
 }
 
 .text-field {
-    -fx-background-color : Lavender;
+    -fx-background-color : linear-gradient(to top, #FFFFFF, #ECE9E6);
+    -fx-font-family: serif;
+    -fx-text-fill: #000C40;
+    -fx-font-size: 18;
+    -fx-display-caret:true;
 }

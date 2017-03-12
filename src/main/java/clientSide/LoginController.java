@@ -24,15 +24,14 @@ public class LoginController {
 
     public void whenClickedLogin() throws IOException {
         Data.name = name.getText();
-
-        System.out.println(Data.host + Data.port + Data.name);
+        System.out.println(Data.host + " " + Data.port + " " + Data.name);
 
         Stage stage;
         stage = (Stage) (name.getScene().getWindow());
         Parent userW = FXMLLoader.load(getClass().getResource("../fxml/userWindow.fxml"));
         Scene scena = new Scene(userW, 1280.0, 768.0);
         scena.getStylesheets().add(0,
-                "file:///D://Hrygorovoch//WorkChatProject//src//main//resources//styles//loginWindowStyle.css");
+                "file:///D://Hrygorovoch//WorkChatProject//src//main//resources//styles//userWindowStyle.css");
         stage.setScene(scena);
         stage.setTitle(Data.name);
         stage.show();
