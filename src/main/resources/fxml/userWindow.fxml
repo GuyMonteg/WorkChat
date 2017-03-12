@@ -11,14 +11,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientSide.GuiController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientSide.UserWController">
    <children>
       <TextArea fx:id="textArea" editable="false" layoutX="14.0" layoutY="125.0" prefHeight="540.0" prefWidth="944.0" promptText="Hello!">
          <font>
             <Font name="Times New Roman Bold" size="20.0" />
          </font>
       </TextArea>
-      <TextField fx:id="message" alignment="TOP_LEFT" layoutX="14.0" layoutY="673.0" prefHeight="85.0" prefWidth="820.0" promptText="message text">
+      <TextField fx:id="message" onKeyPressed="#enterPressed" alignment="TOP_LEFT" layoutX="14.0" layoutY="673.0" prefHeight="85.0" prefWidth="820.0" promptText="message text">
          <font>
             <Font name="Times New Roman" size="18.0" />
          </font>
@@ -35,7 +35,7 @@
             <Font name="Times New Roman Bold" size="17.0" />
          </font>
       </Button>
-      <Button fx:id="send" layoutX="842.0" layoutY="673.0" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="85.0" prefWidth="116.0" text="Send">
+      <Button fx:id="send" layoutX="842.0" layoutY="673.0" mnemonicParsing="false" onAction="#buttonSended" onKeyPressed="#enterPressed" prefHeight="85.0" prefWidth="116.0" text="Send">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>

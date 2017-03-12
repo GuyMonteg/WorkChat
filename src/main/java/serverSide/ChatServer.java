@@ -1,7 +1,6 @@
 package serverSide;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.*;
 import java.net.*;
 import java.io.*;
 
@@ -9,30 +8,82 @@ import java.io.*;
  * Created by Monteg on 11.03.2017.
  */
 public class ChatServer {
-    private ArrayList messageList;
+    private Map<String, DataOutputStream> messageList;
 
-    public class HandleClient implements Runnable {
-        BufferedReader reader;
+    public ChatServer() {
+        messageList = Collections.synchronizedMap(new HashMap<String, DataOutputStream>());
+    }
+
+    public void go() {
+        ServerSocket serverSock = null;
+        Socket clientSocket = null;
+        try {
+            serverSock = new ServerSocket(7707);
+            System.out.println("Server started!");
+            while (true) {
+                clientSocket = serverSock.accept();
+                //System.out.println(clientSocket.getInetAddress() + " : " + clientSocket.getPort());
+                ServerReceiver receiver = new ServerReceiver(clientSocket);
+                ServerReceiver potok = receiver;
+                potok.start();
+            }
+        } catch (IOException e) {
+            System.out.println("Connection failed!");
+        } finally {
+            if (serverSock != null) {
+                try {
+                    serverSock.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void tellEveryone(String message) {
+        Iterator<String> it = messageList.keySet().iterator();
+        while (it.hasNext()) {
+            try {
+                String name = it.next();
+                DataOutputStream out = messageList.get(name);
+                out.writeUTF(message);
+            } catch (Exception ex) {
+                System.out.println("Getting the client name and message failed!");
+            }
+        }
+    }
+
+    public class ServerReceiver extends Thread {
+        DataInputStream dinputS;
+        DataOutputStream doutputS;
         Socket socket;
 
-        public HandleClient(Socket clientSocket) {
+        public ServerReceiver(Socket socket) {
+            this.socket = socket;
             try {
-                socket = clientSocket;
-                reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                dinputS = new DataInputStream(socket.getInputStream());
+                doutputS = new DataOutputStream(socket.getOutputStream());
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Stream failed");
             }
         }
 
         public void run() {
-            String mess;
+            String name = "";
             try {
-                while ((mess = reader.readLine()) != null) {
-                    System.out.println(mess);
-                    tellEveryone(mess);
+                name = dinputS.readUTF();
+                tellEveryone(name + " connected to chat.");
+                messageList.put(name, doutputS);
+                System.out.println("Current user : " + messageList.size());
+                while (dinputS != null) {
+                    tellEveryone(name + " : " + dinputS.readUTF());
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Reading is failed!");
+            } finally {
+                tellEveryone(name + " disconnected.");
+                messageList.remove(name);
+
             }
         }
     }
@@ -41,33 +92,4 @@ public class ChatServer {
         new ChatServer().go();
     }
 
-    public void go() {
-        messageList = new ArrayList();
-        try {
-            ServerSocket serverSock = new ServerSocket(7707);
-            while (true) {
-                Socket clientSocket = serverSock.accept();
-                PrintWriter printMessage = new PrintWriter(clientSocket.getOutputStream());
-                messageList.add(printMessage);
-                Thread inputThread = new Thread(new HandleClient(clientSocket));
-                inputThread.start();
-                System.out.println("Connected to server!");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void tellEveryone(String message) {
-        Iterator it = messageList.iterator();
-        while (it.hasNext()) {
-            try {
-                PrintWriter writer = (PrintWriter) it.next();
-                writer.println(message);
-                writer.flush();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-    }
 }

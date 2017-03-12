@@ -8,13 +8,13 @@ import javafx.scene.*;
 /**
  * Created by Monteg on 10.03.2017.
  */
-public class ClientMain extends Application{
+public class Main extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../fxml/userWindow.fxml"));
-        primaryStage.setTitle("WorkChat");
-        Scene scene = new Scene(root, 1280.0, 768.0);
+        Parent root = FXMLLoader.load(getClass().getResource("../fxml/loginWindow.fxml"));
+        primaryStage.setTitle("LoginController");
+        Scene scene = new Scene(root, 450.0, 315.0);
         scene.getStylesheets().add(0, "file:///D://Hrygorovoch//WorkChatProject//src//main//resources//styles//loginWindowStyle.css");
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
