@@ -7,32 +7,22 @@
 .button {
     -fx-background-color : #3498db;
     -fx-text-fill : #000000;
+    -fx-font-family: serif;
 }
 
 .button: hover {
     -fx-background-color : #ADD100;
     -fx-text-fill : white;
+    -fx-font-family: serif;
+    -fx-font-size: 14pt;
 }
 
 .label {
-    -fx-text-fill : #A7BEE5;
+    -fx-text-fill : white;
 }
 
-.label-settings {
-    -fx-text-fill : #00c6ff;
-}
-
-.label-settings:hover {
-    -fx-text-fill: #00c6ff;
-    -fx-text-fill: #ff6a00;
-}
-
-.label-connection {
-    -fx-text-fill : LimeGreen;
-}
-
-.checkbox {
-    -fx-text-fill : #A7BEE5;
+.label-server {
+    -fx-text-fill: white;
 }
 
 .text-field {
@@ -41,8 +31,4 @@
     -fx-text-fill: #000C40;
     -fx-font-size: 18;
     -fx-display-caret:true;
-}
-
-.label-mainlogo {
-    -fx-text-fill : #000000;
 }

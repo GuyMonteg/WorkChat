@@ -31,8 +31,8 @@ public class UserWController {
     private Label userStatus;
 
     @FXML
-    public void setUserStatus() {
-        userStatus.setText(Data.name);
+    public void setUserStatus(String name) {
+        userStatus.setText(name);
     }
 
     public UserWController() {

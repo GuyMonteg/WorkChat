@@ -52,7 +52,7 @@
             <MenuItem mnemonicParsing="false" text="Away" />
         </items>
       </SplitMenuButton>
-      <Label fx:id="userStatus" onMouseClicked="#setUserStatus" alignment="CENTER" layoutX="16.0" layoutY="97.0" prefHeight="24.0" prefWidth="158.0" styleClass="label-username" text="User name">
+      <Label fx:id="userStatus" alignment="CENTER" layoutX="16.0" layoutY="97.0" prefHeight="24.0" prefWidth="158.0" styleClass="label-username" text="User name">
          <font>
             <Font name="Times New Roman Bold Italic" size="21.0" />
          </font>
