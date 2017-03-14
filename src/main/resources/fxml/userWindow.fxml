@@ -72,7 +72,7 @@
             <Image url="@../images/defaultUser.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="48.0" fitWidth="47.0" layoutX="1215.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="logOut" onMouseClicked="#logOutMainW" fitHeight="48.0" fitWidth="47.0" layoutX="1215.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/2000px-Human-gnome-session-logout.svg.png" />
          </image>

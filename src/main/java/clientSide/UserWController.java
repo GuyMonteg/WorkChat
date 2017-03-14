@@ -1,9 +1,16 @@
 package clientSide;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
+
 import java.net.Socket;
 import java.io.*;
 
@@ -29,6 +36,8 @@ public class UserWController {
 
     @FXML
     private Label userStatus;
+    @FXML
+    private ImageView logOut;
 
     @FXML
     public void setUserStatus(String name) {
@@ -82,6 +91,23 @@ public class UserWController {
         if (key.getCode().toString().equals("ENTER")) {
             buttonSended();
         }
+    }
+
+    @FXML
+    public void logOutMainW() throws IOException {
+        Platform.exit();
+        System.exit(0);
+
+        /*Stage stage2 = new Stage();
+        FXMLLoader loading = new FXMLLoader(getClass().getResource("../fxml/loginWindow.fxml"));
+        Parent connW = loading.load();
+        Scene scena = new Scene(connW, 450.0, 315.0);
+        scena.getStylesheets().add(0,
+                "file:///D://Hrygorovoch//WorkChatProject//src//main//resources//styles//loginWindowStyle.css");
+        stage2.setScene(scena);
+        stage2.setResizable(false);
+        stage2.setTitle("Registration");
+        stage2.show();*/
     }
 
 }
