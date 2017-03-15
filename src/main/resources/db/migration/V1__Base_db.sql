@@ -1,4 +1,4 @@
-CREATE TABLE logIn_data (
+CREATE TABLE users (
 user_name VARCHAR(100) NOT NULL,
 password VARCHAR(100) NOT NULL,
 email VARCHAR(40) NOT NULL,

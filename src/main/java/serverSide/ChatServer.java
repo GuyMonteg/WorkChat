@@ -91,7 +91,6 @@ public class ChatServer {
     }
 
     public static void main(String[] args) {
-
         Flyway flyway = new Flyway();
         Properties propert = new Properties();
         ClassLoader classLoad = ChatServer.class.getClassLoader();
