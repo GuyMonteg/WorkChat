@@ -1,14 +1,13 @@
 package dbconnection;
 
+import config.DBProperties;
 import java.sql.*;
 
 /**
  * Created by Monteg on 15.03.2017.
  */
+
 public class DBConnection {
-    private static String URL = "jdbc:mysql://localhost:3306/user_data?autoReconnect=true&useSSL=false";
-    private static String USERNAME = "root";
-    private static String PASSWORD = "Olsuord2014";
 
     public static Connection getDBConnections() {
         Connection connection = null;
@@ -18,7 +17,7 @@ public class DBConnection {
             ex.printStackTrace();
         }
         try {
-            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            connection = DriverManager.getConnection(DBProperties.URL, DBProperties.USER, DBProperties.PASW);
             return connection;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -70,7 +69,7 @@ public class DBConnection {
 
     public void getMessagesByAuthor(String author) {
         Connection conn = getDBConnections();
-        String takeM = "SELECT * FROM messages WHERE author = " + author;  //Дописать что бы за последних 15 минут
+        String takeM = "SELECT * FROM messages WHERE author = " + author;
         ResultSet rs = null;
 
         try (PreparedStatement ps = conn.prepareStatement(takeM)) {

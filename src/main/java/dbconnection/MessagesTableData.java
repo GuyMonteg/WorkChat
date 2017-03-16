@@ -7,6 +7,7 @@ import java.time.LocalTime;
 /**
  * Created by Monteg on 15.03.2017.
  */
+
 public class MessagesTableData {
     private String author;
     private String messageText;

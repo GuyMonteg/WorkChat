@@ -1,7 +1,7 @@
 package serverSide;
 
+import config.DBProperties;
 import org.flywaydb.core.Flyway;
-
 import java.util.*;
 import java.net.*;
 import java.io.*;
@@ -9,6 +9,7 @@ import java.io.*;
 /**
  * Created by Monteg on 11.03.2017.
  */
+
 public class ChatServer {
     private Map<String, DataOutputStream> messageList;
 
@@ -92,21 +93,7 @@ public class ChatServer {
 
     public static void main(String[] args) {
         Flyway flyway = new Flyway();
-        Properties propert = new Properties();
-        ClassLoader classLoad = ChatServer.class.getClassLoader();
-        try {
-            propert.load(classLoad.getResourceAsStream("db.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Could not get DB properties");
-        }
-        try {
-            Class.forName(propert.getProperty("db.driver"));
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        flyway.setDataSource(propert.getProperty("db.url"), propert.getProperty("db.user"),
-                propert.getProperty("db.password"));
+        flyway.setDataSource(DBProperties.URL, DBProperties.USER, DBProperties.PASW);
         flyway.migrate();
 
         new ChatServer().go();
