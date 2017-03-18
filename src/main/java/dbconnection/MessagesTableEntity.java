@@ -8,7 +8,7 @@ import java.time.LocalTime;
  * Created by Monteg on 15.03.2017.
  */
 
-public class MessagesTableData {
+public class MessagesTableEntity {
     private String author;
     private String messageText;
     private Date date;

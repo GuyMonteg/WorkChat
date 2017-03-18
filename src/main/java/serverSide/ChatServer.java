@@ -27,8 +27,7 @@ public class ChatServer {
                 clientSocket = serverSock.accept();
                 //System.out.println(clientSocket.getInetAddress() + " : " + clientSocket.getPort());
                 ServerReceiver receiver = new ServerReceiver(clientSocket);
-                ServerReceiver potok = receiver;
-                potok.start();
+                receiver.start();
             }
         } catch (IOException e) {
             System.out.println("Connection failed!");
@@ -92,11 +91,11 @@ public class ChatServer {
     }
 
     public static void main(String[] args) {
+        new ChatServer().go();
         Flyway flyway = new Flyway();
         flyway.setDataSource(DBProperties.URL, DBProperties.USER, DBProperties.PASW);
         flyway.migrate();
 
-        new ChatServer().go();
     }
 
 }

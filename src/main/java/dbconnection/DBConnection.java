@@ -2,6 +2,7 @@ package dbconnection;
 
 import config.DBProperties;
 import java.sql.*;
+import java.util.List;
 
 /**
  * Created by Monteg on 15.03.2017.
@@ -25,14 +26,14 @@ public class DBConnection {
         return connection;
     }
 
-    public static void addNewUser(String name, String password, String email) {
+    public static void addNewUser(UsersTableEntity utd) {
         String inToDB = "INSERT INTO users VALUES (?, ?, ?)";
         Connection conn = getDBConnections();
 
         try (PreparedStatement ps = conn.prepareStatement(inToDB)) {
-            ps.setString(1, name);
-            ps.setString(2, password);
-            ps.setString(3, email);
+            ps.setString(1, utd.getUserName());
+            ps.setString(2, utd.getPassword());
+            ps.setString(3, utd.getEmail());
             ps.executeUpdate();
             System.out.println("Insert of user is OK");
         } catch (SQLException ex) {
@@ -46,14 +47,36 @@ public class DBConnection {
         }
     }
 
-    public static void addMessages(String author, String message, Date date) {
+    public static boolean loginUser(String name, String password) {
+        String inToDB = "SELECT user_name, password FROM users WHERE user_name = ? AND password = ?;";
+        Connection conn = getDBConnections();
+        boolean result = false;
+        try (PreparedStatement ps = conn.prepareStatement(inToDB)) {
+            ps.setString(1, name);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            result = rs.next();
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    public static void addMessages(MessagesTableEntity mtd) {
         String inToDB = "INSERT INTO messages VALUES (?, ?, ?)";
         Connection conn = getDBConnections();
 
         try (PreparedStatement ps = conn.prepareStatement(inToDB)) {
-            ps.setString(1, author);
-            ps.setString(2, message);
-            ps.setDate(3, date);
+            ps.setString(1, mtd.getAuthor());
+            ps.setString(2, mtd.getMessageText());
+            ps.setDate(3, mtd.getDate());
             ps.executeUpdate();
             System.out.println("Insert of message is OK");
         } catch (SQLException ex) {
@@ -67,7 +90,7 @@ public class DBConnection {
         }
     }
 
-    public void getMessagesByAuthor(String author) {
+    public List<String> getMessagesByAuthor(String author) {        // в листе не стринг должен быть
         Connection conn = getDBConnections();
         String takeM = "SELECT * FROM messages WHERE author = " + author;
         ResultSet rs = null;
@@ -94,9 +117,10 @@ public class DBConnection {
                 e.printStackTrace();
             }
         }
+        return null;        // need not null
     }
 
-    public void getMessagesByDate(Date date) {
+    public List<String> getMessagesByDate(Date date) {      // в листе не стринг должен быть
         Connection conn = getDBConnections();
         String z2 = "SELECT * FROM messages WHERE message_time = " + date;      //Дописать что бы за последних 15 минут
         ResultSet rs = null;
@@ -123,5 +147,6 @@ public class DBConnection {
                 e.printStackTrace();
             }
         }
+        return null;  // need not null
     }
 }

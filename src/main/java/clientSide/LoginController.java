@@ -1,5 +1,6 @@
 package clientSide;
 
+import dbconnection.DBConnection;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,6 +11,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 
 /**
@@ -32,20 +34,24 @@ public class LoginController {
         Data.name = name.getText();
         System.out.println(Data.host + " " + Data.port + " " + Data.name);
 
-        Stage stage;
-        stage = (Stage) (name.getScene().getWindow());
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/userWindow.fxml"));
-        Parent userW = loader.load();
+         if (DBConnection.loginUser(name.getText(), password.getText()) == true) {
+             Stage stage;
+             stage = (Stage) (name.getScene().getWindow());
+             FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/userWindow.fxml"));
+             Parent userW = loader.load();
 
-        UserWController usernameC = loader.getController();     //take user name and [ut it in main window
-        usernameC.setUserStatus(name.getText());
+             UserWController usernameC = loader.getController();     //take user name and put it in main window
+             usernameC.setUserStatus(name.getText());
 
-        Scene scena = new Scene(userW, 1280.0, 768.0);
-        scena.getStylesheets().add(0,
-                "file:///D://Hrygorovoch//WorkChatProject//src//main//resources//styles//userWindowStyle.css");
-        stage.setScene(scena);
-        stage.setTitle(Data.name);
-        stage.show();
+             Scene scena = new Scene(userW, 1280.0, 768.0);
+             scena.getStylesheets().add(0,
+                     "file:///D://Hrygorovoch//WorkChatProject//src//main//resources//styles//userWindowStyle.css");
+             stage.setScene(scena);
+             stage.setTitle(Data.name);
+             stage.show();
+         } else {
+             JOptionPane.showMessageDialog(null, "Wrong username or password !");
+         }
     }
 
     public void whenSettingsClicked() throws IOException {
