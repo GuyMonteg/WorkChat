@@ -91,10 +91,10 @@ public class ChatServer {
     }
 
     public static void main(String[] args) {
-        new ChatServer().go();
         Flyway flyway = new Flyway();
         flyway.setDataSource(DBProperties.URL, DBProperties.USER, DBProperties.PASW);
         flyway.migrate();
+        new ChatServer().go();
 
     }
 

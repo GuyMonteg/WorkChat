@@ -9,8 +9,8 @@
 
 <AnchorPane fx:controller="clientSide.RegisterControllerW" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="278.0" prefWidth="509.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TextField alignment="CENTER" layoutX="184.0" layoutY="53.0" prefHeight="31.0" prefWidth="310.0" promptText="email" />
-      <TextField alignment="CENTER" layoutX="184.0" layoutY="14.0" prefHeight="31.0" prefWidth="310.0" promptText="name" />
+      <TextField fx:id="email" alignment="CENTER" layoutX="184.0" layoutY="53.0" prefHeight="31.0" prefWidth="310.0" promptText="email" />
+      <TextField fx:id="name" alignment="CENTER" layoutX="184.0" layoutY="14.0" prefHeight="31.0" prefWidth="310.0" promptText="name" />
       <Label layoutX="19.0" layoutY="14.0" prefHeight="31.0" prefWidth="133.0" text="Username">
          <font>
             <Font size="18.0" />
@@ -31,7 +31,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="112.0" layoutY="181.0" prefHeight="31.0" prefWidth="265.0" text="Please enter user name." styleClass="label-info">
+      <Label fx:id="status" alignment="CENTER" contentDisplay="CENTER" layoutX="112.0" layoutY="181.0" prefHeight="31.0" prefWidth="265.0" text="Please enter user name." styleClass="label-info">
          <font>
             <Font size="16.0" />
          </font>
@@ -40,11 +40,11 @@
          <font>
             <Font name="Times New Roman" size="18.0" />
          </font></Button>
-      <Button layoutX="394.0" layoutY="225.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="101.0" text="Register">
+      <Button fx:id="registerButton" onAction="#registerClicked" layoutX="394.0" layoutY="225.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="101.0" text="Register">
          <font>
             <Font name="Times New Roman" size="18.0" />
          </font></Button>
-      <PasswordField alignment="CENTER" layoutX="184.0" layoutY="94.0" prefHeight="31.0" prefWidth="310.0" promptText="password" />
-      <PasswordField alignment="CENTER" layoutX="184.0" layoutY="137.0" prefHeight="31.0" prefWidth="310.0" promptText="repeat password" />
+      <PasswordField fx:id="password" alignment="CENTER" layoutX="184.0" layoutY="94.0" prefHeight="31.0" prefWidth="310.0" promptText="password" />
+      <PasswordField fx:id="passwordrepeat" alignment="CENTER" layoutX="184.0" layoutY="137.0" prefHeight="31.0" prefWidth="310.0" promptText="repeat password" />
    </children>
 </AnchorPane>

@@ -1,8 +1,6 @@
 package dbconnection;
 
 import java.sql.Date;
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 /**
  * Created by Monteg on 15.03.2017.
@@ -11,8 +9,7 @@ import java.time.LocalTime;
 public class MessagesTableEntity {
     private String author;
     private String messageText;
-    private Date date;
-    //private LocalTime time;
+    private Date date;                  //this Date from java.sql.Date
     //private LocalDateTime dateTime;       Maybe will be better to use this class
 
 
@@ -40,11 +37,4 @@ public class MessagesTableEntity {
         this.date = date;
     }
 
-    /*public LocalTime getTime() {
-        return time;
-    }
-
-    public void setTime(LocalTime time) {
-        this.time = time;
-    }*/
 }
