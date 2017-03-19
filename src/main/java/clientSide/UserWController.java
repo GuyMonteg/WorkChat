@@ -1,15 +1,21 @@
 package clientSide;
 
+import dbconnection.DBConnection;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
+import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.net.Socket;
 import java.io.*;
@@ -25,19 +31,19 @@ public class UserWController {
     private DataOutputStream writeStream;
     private Socket socket;
 
-    @FXML
-    private TextField message;
+    @FXML private TextField message;
+    @FXML private Button send;
+    @FXML private TextArea textArea;
+    @FXML private Label userStatus;
+    @FXML private ImageView logOut;
+    @FXML private ListView<String> listView;
 
     @FXML
-    private Button send;
-
-    @FXML
-    private TextArea textArea;
-
-    @FXML
-    private Label userStatus;
-    @FXML
-    private ImageView logOut;
+    public void listDemostrate() {
+        ObservableList<String> users = FXCollections.observableArrayList(DBConnection.getUsersList());
+        listView.setItems(users);
+        listView.refresh();
+    }
 
     @FXML
     public void setUserStatus(String name) {
@@ -58,15 +64,17 @@ public class UserWController {
     }
 
     @FXML
-    void buttonSended() {
-        try {
-            sentMessage = message.getText();
-            System.out.println(name + " : " + sentMessage);
-            writeStream.writeUTF(sentMessage);
-            message.setText("");
-            message.requestFocus();
-        } catch (IOException e) {
-            e.printStackTrace();
+    public void buttonSended() {
+        if (!message.getText().equals("")) {
+            try {
+                sentMessage = message.getText();
+                System.out.println(name + " : " + sentMessage);
+                writeStream.writeUTF(sentMessage);
+                message.setText("");
+                message.requestFocus();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

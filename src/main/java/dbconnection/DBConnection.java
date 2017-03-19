@@ -1,7 +1,11 @@
 package dbconnection;
 
 import config.DBProperties;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -148,5 +152,35 @@ public class DBConnection {
             }
         }
         return null;  // need not null
+    }
+
+    public static ArrayList<String> getUsersList() {
+        ArrayList<String> list = new ArrayList<>();
+
+        Connection conn = getDBConnections();
+        String takeUsers = "SELECT user_name FROM users";
+        ResultSet rs = null;
+
+        try (PreparedStatement ps = conn.prepareStatement(takeUsers)) {
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String userName = rs.getString("user_name");
+                list.add(userName);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return list;
     }
 }

@@ -15,9 +15,7 @@ import javafx.stage.Stage;
 public class RegisterControllerW {
 
     @FXML private Button closeButton;
-
     @FXML private Button registerButton;
-
     @FXML private TextField name;
     @FXML private TextField password;
     @FXML private TextField passwordrepeat;

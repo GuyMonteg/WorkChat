@@ -1,6 +1,7 @@
 package dbconnection;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 /**
  * Created by Monteg on 15.03.2017.
@@ -9,9 +10,8 @@ import java.sql.Date;
 public class MessagesTableEntity {
     private String author;
     private String messageText;
-    private Date date;                  //this Date from java.sql.Date
-    //private LocalDateTime dateTime;       Maybe will be better to use this class
-
+    private Date date;
+    //private LocalDateTime date;
 
     public String getAuthor() {
         return author;

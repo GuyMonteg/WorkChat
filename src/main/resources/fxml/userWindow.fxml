@@ -25,7 +25,7 @@
             <Font name="Times New Roman" size="18.0" />
          </font>
       </TextField>
-      <ListView layoutX="967.0" layoutY="174.0" prefHeight="586.0" prefWidth="296.0" styleClass="list-view" />
+      <ListView fx:id="listView" layoutX="967.0" layoutY="174.0" prefHeight="586.0" prefWidth="296.0" styleClass="list-view" />
       <ScrollBar layoutX="1244.0" layoutY="174.0" orientation="VERTICAL" prefHeight="586.0" prefWidth="18.0" />
       <Button fx:id="send" layoutX="842.0" layoutY="673.0" mnemonicParsing="false" onAction="#buttonSended" onKeyPressed="#enterPressed" prefHeight="85.0" prefWidth="116.0">
          <font>

@@ -20,14 +20,11 @@ import java.io.IOException;
 public class LoginController {
 
     @FXML private TextField name;
-
     @FXML private PasswordField password;
-
     @FXML private Button loginIn;
-
     @FXML private Button register;
-
     @FXML private Label settings;
+    @FXML private Label connStatus;
 
 
     public void whenClickedLogin() throws IOException {
@@ -42,6 +39,7 @@ public class LoginController {
 
              UserWController usernameC = loader.getController();     //take user name and put it in main window
              usernameC.setUserStatus(name.getText());
+             usernameC.listDemostrate();
 
              Scene scena = new Scene(userW, 1280.0, 768.0);
              scena.getStylesheets().add(0,
@@ -50,7 +48,13 @@ public class LoginController {
              stage.setTitle(Data.name);
              stage.show();
          } else {
-             JOptionPane.showMessageDialog(null, "Wrong username or password !");
+             connStatus.setText("Wrong username or password!");
+         }
+         if (name.getText().equals("")) {
+             connStatus.setText("Please write your name!");
+         }
+         if (password.getText().equals("")) {
+             connStatus.setText("Please write your password!");
          }
     }
 
