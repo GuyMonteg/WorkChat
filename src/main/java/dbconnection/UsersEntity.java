@@ -3,14 +3,14 @@ package dbconnection;
 /**
  * Created by Monteg on 15.03.2017.
  */
-public class UsersTableEntity {
+public class UsersEntity {
     private String userName;
     private String password;
     private String email;
 
-    public UsersTableEntity() {}
+    public UsersEntity() {}
 
-    public UsersTableEntity(String userName, String password, String email) {
+    public UsersEntity(String userName, String password, String email) {
         this.userName = userName;
         this.password = password;
         this.email = email;
@@ -45,7 +45,7 @@ public class UsersTableEntity {
         if (o == this) return true;
         if (o == null || o.getClass() != this.getClass()) return false;
 
-        UsersTableEntity guest = (UsersTableEntity) o;
+        UsersEntity guest = (UsersEntity) o;
 
         return userName == guest.userName || (userName != null && userName.equals(guest.getUserName())
                 || password != null && password.equals(guest.getPassword()));

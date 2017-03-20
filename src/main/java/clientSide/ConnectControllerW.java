@@ -16,7 +16,6 @@ public class ConnectControllerW {
     @FXML private TextField portNum;
     @FXML private Button saveProperties;
 
-
     @FXML
     public void saveNewProperties() {
         if ((!hostName.getText().equals("")) && (!portNum.getText().equals(""))) {

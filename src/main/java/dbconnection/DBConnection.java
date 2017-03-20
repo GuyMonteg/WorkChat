@@ -1,8 +1,6 @@
 package dbconnection;
 
 import config.DBProperties;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -30,7 +28,7 @@ public class DBConnection {
         return connection;
     }
 
-    public static void addNewUser(UsersTableEntity utd) {
+    public static void addNewUser(UsersEntity utd) {
         String inToDB = "INSERT INTO users VALUES (?, ?, ?)";
         Connection conn = getDBConnections();
 
@@ -93,7 +91,7 @@ public class DBConnection {
         return result;
     }
 
-    public static void addMessages(MessagesTableEntity mtd) {
+    public static void addMessages(MessagesEntity mtd) {
         String inToDB = "INSERT INTO messages VALUES (?, ?, ?)";
         Connection conn = getDBConnections();
 

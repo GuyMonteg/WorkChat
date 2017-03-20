@@ -1,7 +1,7 @@
 package clientSide;
 
 import dbconnection.DBConnection;
-import dbconnection.UsersTableEntity;
+import dbconnection.UsersEntity;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -47,7 +47,7 @@ public class RegisterControllerW {
             if (password.getText().equals(passwordrepeat.getText())) {
                 if ((!name.getText().equals("")) && (!password.getText().equals(""))
                         && (!passwordrepeat.getText().equals("")) && (!email.getText().equals(""))) {
-                    DBConnection.addNewUser(new UsersTableEntity(name.getText(), password.getText(), email.getText()));
+                    DBConnection.addNewUser(new UsersEntity(name.getText(), password.getText(), email.getText()));
                     Stage stage = (Stage) registerButton.getScene().getWindow();
                     stage.close();
                 }

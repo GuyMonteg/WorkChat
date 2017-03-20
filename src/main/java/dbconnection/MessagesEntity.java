@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
  * Created by Monteg on 15.03.2017.
  */
 
-public class MessagesTableEntity {
+public class MessagesEntity {
     private String author;
     private String messageText;
     private Date date;
