@@ -4,19 +4,14 @@ import dbconnection.DBConnection;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
-import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
-import javafx.util.Callback;
-
 import java.net.Socket;
 import java.io.*;
 
@@ -42,7 +37,7 @@ public class UserWController {
     public void listDemostrate() {
         ObservableList<String> users = FXCollections.observableArrayList(DBConnection.getUsersList());
         listView.setItems(users);
-        listView.refresh();
+        //listView.refresh();
     }
 
     @FXML
@@ -59,7 +54,7 @@ public class UserWController {
             writeStream.writeUTF(name);
             receivedM();
         } catch (IOException e) {
-            System.out.println("Error");
+            System.out.println("Error in UserWController");
         }
     }
 

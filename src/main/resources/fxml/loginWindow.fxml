@@ -12,7 +12,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientSide.LoginController">
    <children>
-      <Button fx:id="loginIn" layoutX="353.0" layoutY="263.0" mnemonicParsing="false" onAction="#whenClickedLogin" prefHeight="38.0" prefWidth="80.0" text="Login">
+      <Button fx:id="loginIn" onKeyPressed="#enterPressed" layoutX="353.0" layoutY="263.0" mnemonicParsing="false" onAction="#whenClickedLogin" prefHeight="38.0" prefWidth="80.0" text="Login">
          <font>
             <Font name="Times New Roman Bold" size="19.0" />
          </font></Button>
@@ -20,7 +20,7 @@
          <font>
             <Font name="Times New Roman Bold" size="18.0" />
          </font></Button>
-      <TextField fx:id="name" layoutX="148.0" layoutY="127.0" prefHeight="31.0" prefWidth="285.0" />
+      <TextField fx:id="name" onKeyPressed="#enterPressed" layoutX="148.0" layoutY="127.0" prefHeight="31.0" prefWidth="285.0" />
       <Label layoutX="19.0" layoutY="127.0" prefHeight="31.0" prefWidth="110.0" text="Username">
          <font>
             <Font name="Times New Roman Bold" size="19.0" />
@@ -34,7 +34,7 @@
       <CheckBox layoutX="148.0" layoutY="207.0" mnemonicParsing="false" styleClass="checkbox" text="Remember me" />
       <Label fx:id="settings" layoutX="375.0" layoutY="207.0" onMouseClicked="#whenSettingsClicked" styleClass="label-settings" text="Settings!" />
       <Label fx:id="connStatus" alignment="CENTER" layoutX="115.0" layoutY="282.0" prefHeight="21.0" prefWidth="231.0" styleClass="label-connection" text="Connection status" />
-      <PasswordField fx:id="password" layoutX="148.0" layoutY="169.0" prefHeight="31.0" prefWidth="285.0" />
+      <PasswordField fx:id="password" onKeyPressed="#enterPressed" layoutX="148.0" layoutY="169.0" prefHeight="31.0" prefWidth="285.0" />
       <Label layoutX="19.0" layoutY="21.0" prefHeight="93.0" prefWidth="345.0" styleClass="label-mainlogo" text="WorkChat">
          <font>
             <Font name="Constantia Bold Italic" size="70.0" />

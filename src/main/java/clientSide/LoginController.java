@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import javax.swing.*;
@@ -50,11 +51,11 @@ public class LoginController {
          } else {
              connStatus.setText("Wrong username or password!");
          }
-         if (name.getText().equals("")) {
+        if (password.getText().equals("")) {
+            connStatus.setText("Please write your password!");
+        }
+        if (name.getText().equals("")) {
              connStatus.setText("Please write your name!");
-         }
-         if (password.getText().equals("")) {
-             connStatus.setText("Please write your password!");
          }
     }
 
@@ -62,6 +63,10 @@ public class LoginController {
         Stage stage = new Stage();
         FXMLLoader loading = new FXMLLoader(getClass().getResource("../fxml/connectWindow.fxml"));
         Parent connW = loading.load();
+
+        ConnectControllerW ccW = loading.getController();
+        ccW.lastPropertiesSet();
+
         Scene scena = new Scene(connW, 310.0, 231.0);
         scena.getStylesheets().add(0,
                 "file:///D://Hrygorovoch//WorkChatProject//src//main//resources//styles//connWindowStyle.css");
@@ -82,5 +87,17 @@ public class LoginController {
         stage.setResizable(false);
         stage.setTitle("Registration");
         stage.show();
+    }
+
+    @FXML
+    public void enterPressed(KeyEvent key) {
+        if (key.getCode().toString().equals("ENTER")) {
+            try {
+                whenClickedLogin();
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("Error when Enter was pressed!");
+            }
+        }
     }
 }

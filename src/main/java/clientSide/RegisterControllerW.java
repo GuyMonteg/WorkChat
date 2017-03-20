@@ -30,28 +30,32 @@ public class RegisterControllerW {
 
     @FXML
     public void registerClicked(ActionEvent event) {
-        if (password.getText().equals(passwordrepeat.getText())) {
-            if ((!name.getText().equals("")) && (!password.getText().equals(""))
-                    && (!passwordrepeat.getText().equals("")) && (!email.getText().equals(""))) {
-                DBConnection.addNewUser(new UsersTableEntity(name.getText(), password.getText(), email.getText()));
-                Stage stage = (Stage) registerButton.getScene().getWindow();
-                stage.close();
-            }
-        }
-        if (name.getText().equals("")) {
-            status.setText("Please enter your name!");
+        if (passwordrepeat.getText().equals("")) {
+            status.setText("Please repeat your password!");
         }
         if (password.getText().equals("")) {
             status.setText("Please enter your password!");
         }
-        if (passwordrepeat.getText().equals("")) {
-            status.setText("Please repeat your password!");
-        }
         if (email.getText().equals("")) {
             status.setText("Please enter your email address!");
         }
-        if (!password.getText().equals(passwordrepeat.getText())) {
-            status.setText("Your passwords do not match!");
+        if (name.getText().equals("")) {
+            status.setText("Please enter your name!");
+        }
+
+        if (DBConnection.userRegisterControl(name.getText()) == false) {
+            if (password.getText().equals(passwordrepeat.getText())) {
+                if ((!name.getText().equals("")) && (!password.getText().equals(""))
+                        && (!passwordrepeat.getText().equals("")) && (!email.getText().equals(""))) {
+                    DBConnection.addNewUser(new UsersTableEntity(name.getText(), password.getText(), email.getText()));
+                    Stage stage = (Stage) registerButton.getScene().getWindow();
+                    stage.close();
+                }
+            } else {
+                status.setText("Your passwords do not match!");
+            }
+        } else {
+            status.setText("This username already exist!");
         }
     }
 }

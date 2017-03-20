@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="231.0" prefWidth="310.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:controller="clientSide.ConnectControllerW" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="231.0" prefWidth="310.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="87.0" layoutY="14.0" prefHeight="35.0" prefWidth="137.0" text="Server details" styleClass="label-server">
          <font>
@@ -23,9 +23,9 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField alignment="CENTER" layoutX="108.0" layoutY="65.0" prefHeight="31.0" prefWidth="181.0" promptText="hostname" />
-      <TextField alignment="CENTER" layoutX="108.0" layoutY="118.0" prefHeight="31.0" prefWidth="181.0" promptText="port" />
-      <Button layoutX="108.0" layoutY="173.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="113.0" text="Connect">
+      <TextField fx:id="hostName" onKeyPressed="#enterPressed" alignment="CENTER" layoutX="108.0" layoutY="65.0" prefHeight="31.0" prefWidth="181.0" promptText="hostname" />
+      <TextField fx:id="portNum" onKeyPressed="#enterPressed" alignment="CENTER" layoutX="108.0" layoutY="118.0" prefHeight="31.0" prefWidth="181.0" promptText="port" />
+      <Button fx:id="saveProperties" onAction="#saveNewProperties" onKeyPressed="#enterPressed" layoutX="108.0" layoutY="173.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="113.0" text="Connect">
          <font>
             <Font name="Times New Roman" size="19.0" />
          </font>

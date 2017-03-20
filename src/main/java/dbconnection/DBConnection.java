@@ -73,6 +73,26 @@ public class DBConnection {
         return result;
     }
 
+    public static boolean userRegisterControl(String name) {
+        String inToDB = "SELECT user_name, password FROM users WHERE user_name = ?;";
+        Connection conn = getDBConnections();
+        boolean result = false;
+        try (PreparedStatement ps = conn.prepareStatement(inToDB)) {
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+            result = rs.next();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
     public static void addMessages(MessagesTableEntity mtd) {
         String inToDB = "INSERT INTO messages VALUES (?, ?, ?)";
         Connection conn = getDBConnections();
