@@ -1,4 +1,4 @@
-package clientSide;
+package clientSource;
 
 import dbconnection.DBConnection;
 import dbconnection.UsersEntity;

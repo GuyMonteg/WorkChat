@@ -1,4 +1,4 @@
-package clientSide;
+package clientSource;
 
 import java.io.*;
 

@@ -1,7 +1,7 @@
-package dbconnection;
+package severControls;
 
 import config.DBProperties;
-
+import dbEntitys.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

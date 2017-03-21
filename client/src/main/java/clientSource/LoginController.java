@@ -1,4 +1,4 @@
-package clientSide;
+package clientSource;
 
 import dbconnection.DBConnection;
 import javafx.fxml.FXML;
@@ -12,7 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.IOException;
 
 /**

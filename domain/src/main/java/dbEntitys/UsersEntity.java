@@ -1,4 +1,4 @@
-package dbconnection;
+package dbEntitys;
 
 /**
  * Created by Monteg on 15.03.2017.

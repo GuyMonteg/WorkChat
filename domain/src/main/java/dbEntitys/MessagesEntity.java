@@ -1,4 +1,4 @@
-package dbconnection;
+package dbEntitys;
 
 import java.sql.Date;
 import java.time.LocalDateTime;

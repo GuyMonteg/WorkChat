@@ -1,4 +1,4 @@
-package serverSide;
+package severControls;
 
 import config.DBProperties;
 import org.flywaydb.core.Flyway;
