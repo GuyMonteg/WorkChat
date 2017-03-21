@@ -1,5 +1,6 @@
-package clientSource;
+package clientSource.controlls;
 
+import clientSource.Data;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;

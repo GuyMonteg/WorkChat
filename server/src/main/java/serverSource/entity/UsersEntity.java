@@ -1,4 +1,4 @@
-package entity;
+package serverSource.entity;
 
 /**
  * Created by Monteg on 15.03.2017.

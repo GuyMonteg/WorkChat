@@ -1,4 +1,4 @@
-package clientSource;
+package clientSource.controlls;
 
 import dbconnection.DBConnection;
 import dbconnection.UsersEntity;

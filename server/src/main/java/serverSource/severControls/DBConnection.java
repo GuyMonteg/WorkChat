@@ -1,7 +1,10 @@
-package severControls;
+package serverSource.severControls;
 
-import config.DBProperties;
+import serverSource.config.DBProperties;
 import entity.*;
+import serverSource.entity.MessagesEntity;
+import serverSource.entity.UsersEntity;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

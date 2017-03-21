@@ -1,5 +1,6 @@
-package clientSource;
+package clientSource.controlls;
 
+import clientSource.Data;
 import dbconnection.DBConnection;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

@@ -1,4 +1,4 @@
-package entity;
+package serverSource.entity;
 
 import java.sql.Date;
 

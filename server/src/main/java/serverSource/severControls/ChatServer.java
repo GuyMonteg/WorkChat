@@ -1,7 +1,8 @@
-package severControls;
+package serverSource.severControls;
 
-import config.DBProperties;
+import serverSource.config.DBProperties;
 import org.flywaydb.core.Flyway;
+
 import java.util.*;
 import java.net.*;
 import java.io.*;

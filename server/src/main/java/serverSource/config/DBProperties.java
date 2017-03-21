@@ -1,6 +1,6 @@
-package config;
+package serverSource.config;
 
-import severControls.ChatServer;
+import serverSource.severControls.ChatServer;
 
 import java.io.IOException;
 import java.io.InputStream;

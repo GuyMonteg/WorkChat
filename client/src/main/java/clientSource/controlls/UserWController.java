@@ -1,5 +1,6 @@
-package clientSource;
+package clientSource.controlls;
 
+import clientSource.Data;
 import dbconnection.DBConnection;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
