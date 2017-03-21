@@ -13,7 +13,6 @@
     <artifactId>server</artifactId>
     <packaging>jar</packaging>
     <name>server</name>
-    <relativePath>../pom.xml</relativePath>
 
     <dependencies>
         <dependency>

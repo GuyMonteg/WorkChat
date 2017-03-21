@@ -1,7 +1,6 @@
-package dbEntitys;
+package entity;
 
 import java.sql.Date;
-import java.time.LocalDateTime;
 
 /**
  * Created by Monteg on 15.03.2017.

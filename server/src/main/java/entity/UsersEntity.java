@@ -1,4 +1,4 @@
-package dbEntitys;
+package entity;
 
 /**
  * Created by Monteg on 15.03.2017.
