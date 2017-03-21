@@ -1,6 +1,6 @@
-package serverSource.severControls;
+package bohdan.webchat.severControls;
 
-import serverSource.config.DBProperties;
+import bohdan.webchat.config.DBProperties;
 import org.flywaydb.core.Flyway;
 
 import java.util.*;

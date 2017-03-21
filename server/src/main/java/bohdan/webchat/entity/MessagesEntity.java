@@ -1,4 +1,4 @@
-package serverSource.entity;
+package bohdan.webchat.entity;
 
 import java.sql.Date;
 

@@ -1,9 +1,9 @@
-package serverSource.severControls;
+package bohdan.webchat.severControls;
 
-import serverSource.config.DBProperties;
+import bohdan.webchat.config.DBProperties;
+import bohdan.webchat.entity.MessagesEntity;
 import entity.*;
-import serverSource.entity.MessagesEntity;
-import serverSource.entity.UsersEntity;
+import bohdan.webchat.entity.UsersEntity;
 
 import java.sql.*;
 import java.util.ArrayList;

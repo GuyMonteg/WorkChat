@@ -1,6 +1,6 @@
-package clientSource.controlls;
+package bohdan.webchat.controllers;
 
-import clientSource.Data;
+import bohdan.webchat.Data;
 import dbconnection.DBConnection;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;

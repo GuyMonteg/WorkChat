@@ -1,4 +1,4 @@
-package serverSource.entity;
+package bohdan.webchat.entity;
 
 /**
  * Created by Monteg on 15.03.2017.

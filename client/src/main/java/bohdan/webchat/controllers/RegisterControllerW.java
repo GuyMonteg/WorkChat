@@ -1,4 +1,4 @@
-package clientSource.controlls;
+package bohdan.webchat.controllers;
 
 import dbconnection.DBConnection;
 import dbconnection.UsersEntity;

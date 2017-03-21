@@ -1,6 +1,6 @@
-package clientSource.controlls;
+package bohdan.webchat.controllers;
 
-import clientSource.Data;
+import bohdan.webchat.Data;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;

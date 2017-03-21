@@ -1,4 +1,4 @@
-package clientSource;
+package bohdan.webchat;
 
 import java.io.*;
 

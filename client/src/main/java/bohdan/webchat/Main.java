@@ -1,4 +1,4 @@
-package clientSource;
+package bohdan.webchat;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
