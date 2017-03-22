@@ -1,7 +1,9 @@
 package bohdan.webchat.controllers;
 
+/*
 import dbconnection.DBConnection;
 import dbconnection.UsersEntity;
+*/
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -30,23 +32,23 @@ public class RegisterControllerW {
 
     @FXML
     public void registerClicked(ActionEvent event) {
-        if (passwordrepeat.getText().equals("")) {
+        if (passwordrepeat.getText().isEmpty()) {
             status.setText("Please repeat your password!");
         }
-        if (password.getText().equals("")) {
+        if (password.getText().isEmpty()) {
             status.setText("Please enter your password!");
         }
-        if (email.getText().equals("")) {
+        if (email.getText().isEmpty()) {
             status.setText("Please enter your email address!");
         }
-        if (name.getText().equals("")) {
+        if (name.getText().isEmpty()) {
             status.setText("Please enter your name!");
         }
 
-        if (DBConnection.userRegisterControl(name.getText()) == false) {
+        /*if (DBConnection.userRegisterControl(name.getText()) == false) {
             if (password.getText().equals(passwordrepeat.getText())) {
-                if ((!name.getText().equals("")) && (!password.getText().equals(""))
-                        && (!passwordrepeat.getText().equals("")) && (!email.getText().equals(""))) {
+                if ((!name.getText().isEmpty()) && (!password.getText().isEmpty())
+                        && (!passwordrepeat.getText().isEmpty()) && (!email.getText().isEmpty())) {
                     DBConnection.addNewUser(new UsersEntity(name.getText(), password.getText(), email.getText()));
                     Stage stage = (Stage) registerButton.getScene().getWindow();
                     stage.close();
@@ -56,6 +58,6 @@ public class RegisterControllerW {
             }
         } else {
             status.setText("This username already exist!");
-        }
+        }*/
     }
 }

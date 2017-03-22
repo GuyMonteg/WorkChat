@@ -2,7 +2,6 @@ package bohdan.webchat.severControls;
 
 import bohdan.webchat.config.DBProperties;
 import bohdan.webchat.entity.MessagesEntity;
-import entity.*;
 import bohdan.webchat.entity.UsersEntity;
 
 import java.sql.*;
@@ -52,15 +51,19 @@ public class DBConnection {
         }
     }
 
-    public static boolean loginUser(String name, String password) {
-        String inToDB = "SELECT user_name, password FROM users WHERE user_name = ? AND password = ?;";
+    public static UsersEntity getUserByName(String name) {
+        String inToDB = "SELECT * FROM users WHERE user_name = ?;";
         Connection conn = getDBConnections();
-        boolean result = false;
         try (PreparedStatement ps = conn.prepareStatement(inToDB)) {
             ps.setString(1, name);
-            ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
-            result = rs.next();
+            while(rs.next()) {
+                UsersEntity ue = new UsersEntity();
+                ue.setUserName(rs.getString(1));
+                ue.setPassword(rs.getString(2));
+                ue.setEmail(rs.getString(3));
+                return ue;
+            }
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -71,7 +74,7 @@ public class DBConnection {
                 e.printStackTrace();
             }
         }
-        return result;
+        return null;
     }
 
     public static boolean userRegisterControl(String name) {

@@ -18,7 +18,7 @@ public class ConnectControllerW {
 
     @FXML
     public void saveNewProperties() {
-        if ((!hostName.getText().equals("")) && (!portNum.getText().equals(""))) {
+        if ((!hostName.getText().isEmpty()) && (!portNum.getText().isEmpty())) {
             Data.setHost(hostName.getText());
             Data.setPort(Integer.parseInt(portNum.getText()));
 

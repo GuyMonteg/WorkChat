@@ -1,7 +1,7 @@
 .root
 {
     -fx-font-family      : sans-serif;
-    -fx-background-color : linear-gradient(to bottom, #517fa4, #243949);
+    -fx-background-color : linear-gradient(to bottom, #517fa4, #13547a);
 }
 
 .button {

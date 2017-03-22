@@ -1,5 +1,7 @@
 package bohdan.webchat.severControls;
 
+import bohdan.webchat.LoginRessponce;
+import bohdan.webchat.UserBean;
 import bohdan.webchat.config.DBProperties;
 import org.flywaydb.core.Flyway;
 
@@ -12,10 +14,10 @@ import java.io.*;
  */
 
 public class ChatServer {
-    private Map<String, DataOutputStream> messageList;
+    private Map<String, ObjectOutputStream> messageList;
 
     public ChatServer() {
-        messageList = Collections.synchronizedMap(new HashMap<String, DataOutputStream>());
+        messageList = Collections.synchronizedMap(new HashMap<String, ObjectOutputStream>());
     }
 
     public void go() {
@@ -24,14 +26,23 @@ public class ChatServer {
         try {
             serverSock = new ServerSocket(7707);
             System.out.println("Server started!");
-            while (true) {
+           // while (true) {
                 clientSocket = serverSock.accept();
-                //System.out.println(clientSocket.getInetAddress() + " : " + clientSocket.getPort());
-                ServerReceiver receiver = new ServerReceiver(clientSocket);
-                receiver.start();
-            }
+            ObjectInputStream dinputS = new ObjectInputStream(clientSocket.getInputStream());
+            UserBean bean = (UserBean) dinputS.readObject();
+            System.out.println(bean);
+            //LoginRessponce lr = new LoginRessponce();
+            //lr.setStatus(bean.toString());
+
+
+            //System.out.println(clientSocket.getInetAddress() + " : " + clientSocket.getPort());
+                /*ServerReceiver receiver = new ServerReceiver(clientSocket);
+                receiver.start();*/
+           // }
         } catch (IOException e) {
             System.out.println("Connection failed!");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         } finally {
             if (serverSock != null) {
                 try {
@@ -48,7 +59,7 @@ public class ChatServer {
         while (it.hasNext()) {
             try {
                 String name = it.next();
-                DataOutputStream out = messageList.get(name);
+                ObjectOutputStream out = messageList.get(name);
                 out.writeUTF(message);
             } catch (Exception ex) {
                 System.out.println("Getting the client name and message failed!");
@@ -57,36 +68,42 @@ public class ChatServer {
     }
 
     public class ServerReceiver extends Thread {
-        DataInputStream dinputS;
-        DataOutputStream doutputS;
+        ObjectOutputStream doutputS;
+        ObjectInputStream dinputS;
         Socket socket;
 
         public ServerReceiver(Socket socket) {
             this.socket = socket;
             try {
-                dinputS = new DataInputStream(socket.getInputStream());
-                doutputS = new DataOutputStream(socket.getOutputStream());
+                dinputS = new ObjectInputStream(socket.getInputStream());
+                doutputS = new ObjectOutputStream(socket.getOutputStream());
             } catch (IOException e) {
                 System.out.println("Stream failed");
             }
         }
 
         public void run() {
-            String name = "";
+            System.out.println("new socked connected");
+            UserBean userBean = null;
             try {
-                name = dinputS.readUTF();
-                tellEveryone(name + " connected to chat.");
+                userBean =(UserBean) dinputS.readObject();
+                System.out.println(userBean.toString());
+
+
+                /*tellEveryone(name + " connected to chat.");
                 messageList.put(name, doutputS);
                 System.out.println("Current user : " + messageList.size());
                 while (dinputS != null) {
                     tellEveryone(name + " : " + dinputS.readUTF());
-                }
+                }*/
             } catch (IOException e) {
                 System.out.println("Reading is failed!");
-            } finally {
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            /*} finally {
                 tellEveryone(name + " disconnected.");
                 messageList.remove(name);
-
+*/
             }
         }
     }

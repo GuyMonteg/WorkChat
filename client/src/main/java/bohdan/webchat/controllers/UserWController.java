@@ -1,7 +1,7 @@
 package bohdan.webchat.controllers;
 
 import bohdan.webchat.Data;
-import dbconnection.DBConnection;
+/*import dbconnection.DBConnection;*/
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,8 +19,8 @@ public class UserWController {
     private String name;
     private String sentMessage;
     private String receivedMessage;
-    private DataInputStream readStream;
-    private DataOutputStream writeStream;
+    private ObjectInputStream readStream;
+    private ObjectOutputStream writeStream;
     private Socket socket;
 
     @FXML private TextField message;
@@ -32,8 +32,8 @@ public class UserWController {
 
     @FXML
     public void listDemostrate() {
-        ObservableList<String> users = FXCollections.observableArrayList(DBConnection.getUsersList());
-        listView.setItems(users);
+        //ObservableList<String> users = FXCollections.observableArrayList(DBConnection.getUsersList());
+        //listView.setItems(users);
         //listView.refresh();
     }
 
@@ -45,8 +45,8 @@ public class UserWController {
     public UserWController() {
         try {
             socket = new Socket(Data.host, Data.port);
-            readStream = new DataInputStream(socket.getInputStream());
-            writeStream = new DataOutputStream(socket.getOutputStream());
+            readStream = new ObjectInputStream(socket.getInputStream());
+            writeStream = new ObjectOutputStream(socket.getOutputStream());
             this.name = Data.name;
             writeStream.writeUTF(name);
             receivedM();
@@ -57,7 +57,7 @@ public class UserWController {
 
     @FXML
     public void buttonSended() {
-        if (!message.getText().equals("")) {
+        if (!message.getText().isEmpty()) {
             try {
                 sentMessage = message.getText();
                 System.out.println(name + " : " + sentMessage);

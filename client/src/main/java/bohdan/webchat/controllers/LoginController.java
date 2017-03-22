@@ -1,7 +1,11 @@
 package bohdan.webchat.controllers;
 
 import bohdan.webchat.Data;
+/*
 import dbconnection.DBConnection;
+*/
+import bohdan.webchat.UserBean;
+import bohdan.webchat.web.SocketThread;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,6 +18,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 
 /**
  * Created by Monteg on 12.03.2017.
@@ -29,13 +35,21 @@ public class LoginController {
 
 
     public void whenClickedLogin() throws IOException {
+
         Data.name = name.getText();
         System.out.println(Data.host + " " + Data.port + " " + Data.name);
+        UserBean bean = new UserBean();
+        bean.setName(name.getText());
+        bean.setPassword(password.getText());
+        SocketThread.writeStream.writeObject(bean);
+        SocketThread.writeStream.flush();
 
-         if (DBConnection.loginUser(name.getText(), password.getText()) == true) {
+        //System.out.println(bean.isExist());
+
+        if (bean.isExist()) {
              Stage stage;
              stage = (Stage) (name.getScene().getWindow());
-             FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/userWindow.fxml"));
+             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/userWindow.fxml"));
              Parent userW = loader.load();
 
              UserWController usernameC = loader.getController();     //take user name and put it in main window
@@ -44,24 +58,24 @@ public class LoginController {
 
              Scene scena = new Scene(userW, 1280.0, 768.0);
              scena.getStylesheets().add(0,
-                     "file:///D://Hrygorovoch//WorkChatProject//src//main//resources//styles//userWindowStyle.css");
+                     "file:///D://Hrygorovoch//WorkChatProject//client//src//main//resources//styles//userWindowStyle.css");
              stage.setScene(scena);
              stage.setTitle(Data.name);
              stage.show();
-         } else {
+        } else {
              connStatus.setText("Wrong username or password!");
-         }
-        if (password.getText().equals("")) {
+        }
+        if (password.getText().isEmpty()) {
             connStatus.setText("Please write your password!");
         }
-        if (name.getText().equals("")) {
+        if (name.getText().isEmpty()) {
              connStatus.setText("Please write your name!");
-         }
+        }
     }
 
     public void whenSettingsClicked() throws IOException {
         Stage stage = new Stage();
-        FXMLLoader loading = new FXMLLoader(getClass().getResource("../fxml/connectWindow.fxml"));
+        FXMLLoader loading = new FXMLLoader(getClass().getResource("/fxml/connectWindow.fxml"));
         Parent connW = loading.load();
 
         ConnectControllerW ccW = loading.getController();
@@ -69,7 +83,7 @@ public class LoginController {
 
         Scene scena = new Scene(connW, 310.0, 231.0);
         scena.getStylesheets().add(0,
-                "file:///D://Hrygorovoch//WorkChatProject//src//main//resources//styles//connWindowStyle.css");
+                "file:///D://Hrygorovoch//WorkChatProject//client//src//main//resources//styles//connWindowStyle.css");
         stage.setScene(scena);
         stage.setResizable(false);
         stage.setTitle("Settings");
@@ -78,11 +92,11 @@ public class LoginController {
 
     public void registerWindowClicked() throws IOException {
         Stage stage = new Stage();
-        FXMLLoader loading = new FXMLLoader(getClass().getResource("../fxml/registerWindow.fxml"));
+        FXMLLoader loading = new FXMLLoader(getClass().getResource("/fxml/registerWindow.fxml"));
         Parent connW = loading.load();
         Scene scena = new Scene(connW, 509.0, 278.0);
         scena.getStylesheets().add(0,
-                "file:///D://Hrygorovoch//WorkChatProject//src//main//resources//styles//registerWindowStyle.css");
+                "file:///D://Hrygorovoch//WorkChatProject//client//src//main//resources//styles//registerWindowStyle.css");
         stage.setScene(scena);
         stage.setResizable(false);
         stage.setTitle("Registration");
