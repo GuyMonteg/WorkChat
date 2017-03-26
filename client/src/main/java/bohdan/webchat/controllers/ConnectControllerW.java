@@ -18,18 +18,18 @@ public class ConnectControllerW {
 
     @FXML
     public void saveNewProperties() {
-        if ((!hostName.getText().isEmpty()) && (!portNum.getText().isEmpty())) {
+        /*if ((!hostName.getText().isEmpty()) && (!portNum.getText().isEmpty())) {
             Data.setHost(hostName.getText());
             Data.setPort(Integer.parseInt(portNum.getText()));
 
             Stage stage = (Stage) saveProperties.getScene().getWindow();
             stage.close();
-        }
+        }*/
     }
-    public void lastPropertiesSet() {
+    /*public void lastPropertiesSet() {
         hostName.setText(Data.getHost());
         portNum.setText(String.valueOf(Data.getPort()));
-    }
+    }*/
 
     @FXML
     public void enterPressed(KeyEvent key) {

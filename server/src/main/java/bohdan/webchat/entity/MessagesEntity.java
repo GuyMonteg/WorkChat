@@ -12,6 +12,14 @@ public class MessagesEntity {
     private Date date;
     //private LocalDateTime date;
 
+    public MessagesEntity() {}
+
+    public MessagesEntity(String author, String messageText, Date date) {
+        this.author = author;
+        this.messageText = messageText;
+        this.date = date;
+    }
+
     public String getAuthor() {
         return author;
     }
@@ -36,4 +44,12 @@ public class MessagesEntity {
         this.date = date;
     }
 
+    @Override
+    public String toString() {
+        return "MessagesEntity{" +
+                "author='" + author + '\'' +
+                ", messageText='" + messageText + '\'' +
+                ", date=" + date +
+                '}';
+    }
 }

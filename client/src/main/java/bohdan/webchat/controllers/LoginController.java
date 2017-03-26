@@ -1,25 +1,19 @@
 package bohdan.webchat.controllers;
 
+import bohdan.webchat.ConnectingStatus;
 import bohdan.webchat.Data;
-/*
-import dbconnection.DBConnection;
-*/
-import bohdan.webchat.UserBean;
+import bohdan.webchat.LoginRequest;
+import bohdan.webchat.LoginResponse;
 import bohdan.webchat.web.SocketThread;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
+import java.io.*;
+import java.net.Socket;
 
 /**
  * Created by Monteg on 12.03.2017.
@@ -34,43 +28,36 @@ public class LoginController {
     @FXML private Label connStatus;
 
 
-    public void whenClickedLogin() throws IOException {
+    public void whenClickedLogin() throws ClassNotFoundException, IOException {
+        LoginRequest loginRequest = new LoginRequest();
+        loginRequest.setUsername(name.getText());
+        loginRequest.setUserpassword(password.getText());
 
-        Data.name = name.getText();
-        System.out.println(Data.host + " " + Data.port + " " + Data.name);
-        UserBean bean = new UserBean();
-        bean.setName(name.getText());
-        bean.setPassword(password.getText());
-        SocketThread.writeStream.writeObject(bean);
-        SocketThread.writeStream.flush();
+        ObjectOutputStream outputStream = SocketThread.writeStream;
+        outputStream.writeObject(loginRequest);
+        outputStream.flush();
 
-        //System.out.println(bean.isExist());
+        ObjectInputStream inputStream = SocketThread.readStream;
+//        LoginResponse loginResponse = (LoginResponse) inputStream.readObject();
+        //System.out.println(loginResponse.getStatus());
 
-        if (bean.isExist()) {
-             Stage stage;
-             stage = (Stage) (name.getScene().getWindow());
-             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/userWindow.fxml"));
-             Parent userW = loader.load();
+            /*if (loginResponse.getStatus().equals(ConnectingStatus.OK)) {
+                Stage stage;
+                stage = (Stage) (name.getScene().getWindow());
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/userWindow.fxml"));
+                Parent userW = loader.load();
 
-             UserWController usernameC = loader.getController();     //take user name and put it in main window
-             usernameC.setUserStatus(name.getText());
-             usernameC.listDemostrate();
+                UserWController usernameC = loader.getController();     //take user name and put it in main window
+                usernameC.setUserStatus(name.getText());
+                usernameC.listDemostrate();
 
-             Scene scena = new Scene(userW, 1280.0, 768.0);
-             scena.getStylesheets().add(0,
-                     "file:///D://Hrygorovoch//WorkChatProject//client//src//main//resources//styles//userWindowStyle.css");
-             stage.setScene(scena);
-             stage.setTitle(Data.name);
-             stage.show();
-        } else {
-             connStatus.setText("Wrong username or password!");
-        }
-        if (password.getText().isEmpty()) {
-            connStatus.setText("Please write your password!");
-        }
-        if (name.getText().isEmpty()) {
-             connStatus.setText("Please write your name!");
-        }
+                Scene scena = new Scene(userW, 1280.0, 768.0);
+                scena.getStylesheets().add(0,
+                        "file:///D://Hrygorovoch//WorkChatProject//client//src//main//resources//styles//userWindowStyle.css");
+                stage.setScene(scena);
+                stage.setTitle(Data.name);
+                stage.show();
+            }*/
     }
 
     public void whenSettingsClicked() throws IOException {
@@ -79,7 +66,7 @@ public class LoginController {
         Parent connW = loading.load();
 
         ConnectControllerW ccW = loading.getController();
-        ccW.lastPropertiesSet();
+        //ccW.lastPropertiesSet();
 
         Scene scena = new Scene(connW, 310.0, 231.0);
         scena.getStylesheets().add(0,
@@ -111,6 +98,8 @@ public class LoginController {
             } catch (IOException e) {
                 e.printStackTrace();
                 System.out.println("Error when Enter was pressed!");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
             }
         }
     }

@@ -10,7 +10,7 @@ public class Data {
     public static int port = 7707;         // = 7707
     public static String name;
 
-    public static String getHost() {
+    /*public static String getHost() {
         return host;
     }
 
@@ -36,5 +36,5 @@ public class Data {
             ex.printStackTrace();
             System.out.println("Error when trying to write to a file with server properties.");
         }
-    }
+    }*/
 }

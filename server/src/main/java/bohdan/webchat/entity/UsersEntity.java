@@ -9,17 +9,12 @@ import java.beans.PropertyChangeListener;
 /**
  * Created by Monteg on 15.03.2017.
  */
-public class UsersEntity implements PropertyChangeListener {
+public class UsersEntity {
     private String userName;
     private String password;
     private String email;
 
     public UsersEntity() {
-    }
-
-    public UsersEntity(String userName, String password) {
-        this.userName = userName;
-        this.password = password;
     }
 
     public UsersEntity(String userName, String password, String email) {
@@ -53,42 +48,11 @@ public class UsersEntity implements PropertyChangeListener {
     }
 
     @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-
+    public String toString() {
+        return "UsersEntity{" +
+                "userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*@Override
-    public boolean equals(Object o) {
-        if (o == this) return true;
-        if (o == null || o.getClass() != this.getClass()) return false;
-        UsersEntity guest = (UsersEntity) o;
-        return userName == guest.userName || (userName != null && userName.equals(guest.getUserName())
-                || password != null && password.equals(guest.getPassword()));
-    }
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((userName == null) ? 0 : userName.hashCode());
-        result = prime * result + ((password == null) ? 0 : password.hashCode());
-        return result;
-    }*/
-
