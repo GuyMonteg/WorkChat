@@ -1,4 +1,6 @@
-package bohdan.webchat;
+package bohdan.webchat.loginBeans;
+
+import bohdan.webchat.ConnectingStatus;
 
 import java.io.Serializable;
 

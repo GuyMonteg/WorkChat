@@ -2,18 +2,21 @@ package bohdan.webchat.severControls;
 
 import bohdan.webchat.*;
 import bohdan.webchat.entity.MessagesEntity;
+import bohdan.webchat.entity.UsersEntity;
+import bohdan.webchat.loginBeans.LoginRequest;
+import bohdan.webchat.loginBeans.LoginResponse;
+import bohdan.webchat.registrationnBeans.RegistrationRequest;
+import bohdan.webchat.registrationnBeans.RegistrationResponse;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStreamWriter;
 import java.net.Socket;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Set;
 
+import static bohdan.webchat.DAO.UserDAO.addNewUser;
 import static bohdan.webchat.DAO.UserDAO.findUserByName;
+import static bohdan.webchat.DAO.UserDAO.userRegisterControl;
 import static bohdan.webchat.severControls.ChatServer.writers;
 
 /**
@@ -21,11 +24,10 @@ import static bohdan.webchat.severControls.ChatServer.writers;
  */
 
 public class ClientHandler extends Thread {
-    private RegistrationResponse regResponse = new RegistrationResponse();
-
     private Socket socket;
     private ObjectOutputStream objectOutputS;
     private ObjectInputStream objectInputS;
+    private Object obj = null;
 
     public ClientHandler(Socket socket) {
         this.socket = socket;
@@ -40,30 +42,59 @@ public class ClientHandler extends Thread {
 
     public void run() {
         System.out.println("new socked connected");
-
         try {
-            //while (objectInputS.readObject() != null) {
-                if (objectInputS.readObject() instanceof LoginRequest) {
-                    System.out.println(userIdentification().toString() + "в ране");
-                    objectOutputS.writeObject(userIdentification());
+            while (true) {
+                obj = objectInputS.readObject();
+                if (obj instanceof LoginRequest) {
+                    LoginResponse response = userIdentification();
+                    System.out.println(response.toString() + "в ране");
+
+                    objectOutputS.writeObject(response);
                     objectOutputS.flush();
                 }
-            //}
+                if (obj instanceof RegistrationRequest) {
+                    RegistrationResponse registresponse = userRegistration();
+                    System.out.println(registresponse.toString());
+
+                    objectOutputS.writeObject(registresponse);
+                    objectOutputS.flush();
+                }
+                //tellEveryone(MessagesRequest);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
-    
+
+    private RegistrationResponse userRegistration() {
+        RegistrationResponse registrationResp = new RegistrationResponse();
+
+        RegistrationRequest registrationReq = (RegistrationRequest) obj;
+        System.out.println(registrationReq.toString());
+        boolean verificationOf = userRegisterControl(registrationReq.getUsername());
+        System.out.println(verificationOf);
+        if (verificationOf == false) {
+            UsersEntity usersEntity = new UsersEntity();
+            usersEntity.setUserName(registrationReq.getUsername());
+            usersEntity.setPassword(registrationReq.getPassword());
+            usersEntity.setEmail(registrationReq.getEmail());
+            addNewUser(usersEntity);
+            registrationResp.setStatus(ConnectingStatus.OK);
+        } else {
+            registrationResp.setStatus(ConnectingStatus.EXIST);
+        }
+        return registrationResp;
+    }
+
     public LoginResponse userIdentification() {
         LoginResponse loginResponse = new LoginResponse();
-        try {
-            LoginRequest loginRequest = (LoginRequest) objectInputS.readObject();
+            LoginRequest loginRequest = (LoginRequest) obj;
             System.out.println(loginRequest.toString());
-            if (findUserByName(loginRequest.getUsername()) != null) {
-                if (findUserByName(loginRequest.getUsername()).getPassword()
-                        .equals(loginRequest.getUserpassword())) {
+            UsersEntity user = findUserByName(loginRequest.getUsername());
+            if (user != null) {
+                if (user.getPassword().equals(loginRequest.getUserpassword())) {
 
                     loginResponse.setStatus(ConnectingStatus.OK);
                     System.out.println(loginResponse.getStatus());
@@ -73,10 +104,6 @@ public class ClientHandler extends Thread {
             } else {
                 loginResponse.setStatus(ConnectingStatus.WRONGNAME);
             }
-        } catch(IOException | ClassNotFoundException e){
-            e.printStackTrace();
-            System.out.println("Bug in userIdentification method!");
-        }
         return loginResponse;
     }
 

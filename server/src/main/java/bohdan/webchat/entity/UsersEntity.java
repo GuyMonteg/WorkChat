@@ -1,11 +1,5 @@
 package bohdan.webchat.entity;
 
-import bohdan.webchat.UserBean;
-import bohdan.webchat.severControls.DBConnection;
-
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
 /**
  * Created by Monteg on 15.03.2017.
  */

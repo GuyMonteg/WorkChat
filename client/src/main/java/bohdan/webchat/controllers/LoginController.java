@@ -1,10 +1,8 @@
 package bohdan.webchat.controllers;
 
-import bohdan.webchat.ConnectingStatus;
-import bohdan.webchat.Data;
-import bohdan.webchat.LoginRequest;
-import bohdan.webchat.LoginResponse;
-import bohdan.webchat.web.SocketThread;
+import bohdan.webchat.*;
+import bohdan.webchat.loginBeans.LoginRequest;
+import bohdan.webchat.loginBeans.LoginResponse;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,7 +11,6 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import java.io.*;
-import java.net.Socket;
 
 /**
  * Created by Monteg on 12.03.2017.
@@ -28,36 +25,70 @@ public class LoginController {
     @FXML private Label connStatus;
 
 
-    public void whenClickedLogin() throws ClassNotFoundException, IOException {
-        LoginRequest loginRequest = new LoginRequest();
-        loginRequest.setUsername(name.getText());
-        loginRequest.setUserpassword(password.getText());
+    public void whenClickedLogin() {
+        if (!name.getText().isEmpty()) {
+            if (!password.getText().isEmpty()) {
+                LoginRequest loginRequest = new LoginRequest();
+                loginRequest.setUsername(name.getText());
+                loginRequest.setUserpassword(password.getText());
 
-        ObjectOutputStream outputStream = SocketThread.writeStream;
-        outputStream.writeObject(loginRequest);
-        outputStream.flush();
+                ObjectOutputStream outputStream = Main.writeStream;
+                try {
+                    outputStream.writeObject(loginRequest);
+                    outputStream.flush();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.out.println("Exception when try to write object from login");
+                }
+                LoginResponse lr = receiveObject();
 
-        ObjectInputStream inputStream = SocketThread.readStream;
-//        LoginResponse loginResponse = (LoginResponse) inputStream.readObject();
-        //System.out.println(loginResponse.getStatus());
+                if (lr.getStatus().equals(ConnectingStatus.OK)) {
+                    Stage stage;
+                    stage = (Stage) (name.getScene().getWindow());
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/userWindow.fxml"));
+                    Parent userW = null;
+                    try {
+                        userW = loader.load();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        System.out.println("Exception when try to load fxml loader");
+                    }
 
-            /*if (loginResponse.getStatus().equals(ConnectingStatus.OK)) {
-                Stage stage;
-                stage = (Stage) (name.getScene().getWindow());
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/userWindow.fxml"));
-                Parent userW = loader.load();
+                    UserWController usernameC = loader.getController();     //take user name and put it in main window
+                    usernameC.setUserStatus(name.getText());
+                    usernameC.listDemostrate();
 
-                UserWController usernameC = loader.getController();     //take user name and put it in main window
-                usernameC.setUserStatus(name.getText());
-                usernameC.listDemostrate();
+                    Scene scena = new Scene(userW, 1280.0, 768.0);
+                    stage.setScene(scena);
+                    stage.setTitle(Data.name);
+                    stage.show();
+                }
+                if (lr.getStatus().equals(ConnectingStatus.WRONGNAME)) {
+                    connStatus.setText("Wrong user name !");
+                }
+                if (lr.getStatus().equals(ConnectingStatus.WRONGPASS)) {
+                    connStatus.setText("Wrong password !");
+                }
+            } else {
+                connStatus.setText("Please write your password!");
+            }
+        } else {
+            connStatus.setText("Please write your name!");
+        }
+    }
 
-                Scene scena = new Scene(userW, 1280.0, 768.0);
-                scena.getStylesheets().add(0,
-                        "file:///D://Hrygorovoch//WorkChatProject//client//src//main//resources//styles//userWindowStyle.css");
-                stage.setScene(scena);
-                stage.setTitle(Data.name);
-                stage.show();
-            }*/
+    public LoginResponse receiveObject() {
+        LoginResponse loginResponse = null;
+        try {
+            ObjectInputStream readStream = Main.readStream;
+            loginResponse = (LoginResponse) readStream.readObject();
+            System.out.println(loginResponse.getStatus());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return loginResponse;
     }
 
     public void whenSettingsClicked() throws IOException {
@@ -69,8 +100,6 @@ public class LoginController {
         //ccW.lastPropertiesSet();
 
         Scene scena = new Scene(connW, 310.0, 231.0);
-        scena.getStylesheets().add(0,
-                "file:///D://Hrygorovoch//WorkChatProject//client//src//main//resources//styles//connWindowStyle.css");
         stage.setScene(scena);
         stage.setResizable(false);
         stage.setTitle("Settings");
@@ -82,8 +111,6 @@ public class LoginController {
         FXMLLoader loading = new FXMLLoader(getClass().getResource("/fxml/registerWindow.fxml"));
         Parent connW = loading.load();
         Scene scena = new Scene(connW, 509.0, 278.0);
-        scena.getStylesheets().add(0,
-                "file:///D://Hrygorovoch//WorkChatProject//client//src//main//resources//styles//registerWindowStyle.css");
         stage.setScene(scena);
         stage.setResizable(false);
         stage.setTitle("Registration");
@@ -93,14 +120,7 @@ public class LoginController {
     @FXML
     public void enterPressed(KeyEvent key) {
         if (key.getCode().toString().equals("ENTER")) {
-            try {
-                whenClickedLogin();
-            } catch (IOException e) {
-                e.printStackTrace();
-                System.out.println("Error when Enter was pressed!");
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
+            whenClickedLogin();
         }
     }
 }

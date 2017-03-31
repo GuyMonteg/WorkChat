@@ -43,7 +43,7 @@ public class UserWController {
     }
 
     public UserWController() {
-        try {
+        /*try {
             socket = new Socket(Data.host, Data.port);
             readStream = new ObjectInputStream(socket.getInputStream());
             writeStream = new ObjectOutputStream(socket.getOutputStream());
@@ -52,12 +52,12 @@ public class UserWController {
             receivedM();
         } catch (IOException e) {
             System.out.println("Error in UserWController");
-        }
+        }*/
     }
 
     @FXML
     public void buttonSended() {
-        if (!message.getText().isEmpty()) {
+        /*if (!message.getText().isEmpty()) {
             try {
                 sentMessage = message.getText();
                 System.out.println(name + " : " + sentMessage);
@@ -67,11 +67,10 @@ public class UserWController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
     }
-
     public void receivedM() {
-        Thread potokPolucheniyaM = new Thread() {
+        /*Thread potokPolucheniyaM = new Thread() {
             @Override
             public void run() {
                 while (true) {
@@ -84,13 +83,13 @@ public class UserWController {
                 }
             }
         };
-        potokPolucheniyaM.start();
+        potokPolucheniyaM.start();*/
     }
 
     public void enterPressed(KeyEvent key) {
-        if (key.getCode().toString().equals("ENTER")) {
+        /*if (key.getCode().toString().equals("ENTER")) {
             buttonSended();
-        }
+        }*/
     }
 
     @FXML

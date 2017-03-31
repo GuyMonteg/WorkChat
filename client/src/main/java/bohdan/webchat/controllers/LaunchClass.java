@@ -17,8 +17,6 @@ public class LaunchClass extends Application {
                 "/fxml/loginWindow.fxml"));
         primaryStage.setTitle("Login");
         Scene scene = new Scene(root, 450.0, 315.0);
-        scene.getStylesheets().add(0,
-                "file:///D://Hrygorovoch//WorkChatProject//client//src//main//resources//styles//loginWindowStyle.css");
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();

@@ -1,4 +1,4 @@
-package bohdan.webchat;
+package bohdan.webchat.loginBeans;
 
 import java.io.Serializable;
 

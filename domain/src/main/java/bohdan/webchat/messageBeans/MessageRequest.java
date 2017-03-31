@@ -1,18 +1,17 @@
-package bohdan.webchat;
+package bohdan.webchat.messageBeans;
 
+import java.io.Serializable;
 import java.sql.Date;
-import java.util.Objects;
 
 /**
- * Created by Monteg on 21.03.2017.
+ * Created by Monteg on 31.03.2017.
  */
-public class MessagesBean {
+public class MessageRequest implements Serializable {
     private String author;
     private String messageText;
     private Date date;
 
-    public MessagesBean() {
-    }
+    public MessageRequest() { }
 
     public String getAuthor() {
         return author;
@@ -43,20 +42,5 @@ public class MessagesBean {
         return "Author " + author + '\'' +
                 ", messageText '" + messageText + '\'' +
                 "', date" + date;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        MessagesBean messagesBeans = (MessagesBean) o;
-        return Objects.equals(author, messagesBeans.author) &&
-                Objects.equals(messageText, messagesBeans.messageText) &&
-                Objects.equals(date, messagesBeans.date);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(author, messageText, date);
     }
 }
