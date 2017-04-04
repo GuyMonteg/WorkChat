@@ -1,9 +1,5 @@
 package bohdan.webchat.controllers;
 
-/*
-import dbconnection.DBConnection;
-import dbconnection.UsersEntity;
-*/
 import bohdan.webchat.ConnectingStatus;
 import bohdan.webchat.Main;
 import bohdan.webchat.registrationnBeans.RegistrationRequest;
@@ -12,7 +8,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;

@@ -5,18 +5,21 @@ import bohdan.webchat.entity.MessagesEntity;
 import bohdan.webchat.entity.UsersEntity;
 import bohdan.webchat.loginBeans.LoginRequest;
 import bohdan.webchat.loginBeans.LoginResponse;
+import bohdan.webchat.messageBeans.MessageRequest;
+import bohdan.webchat.messageBeans.MessageResponse;
 import bohdan.webchat.registrationnBeans.RegistrationRequest;
 import bohdan.webchat.registrationnBeans.RegistrationResponse;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Iterator;
 
+import static bohdan.webchat.DAO.MessagesDAO.addMessages;
 import static bohdan.webchat.DAO.UserDAO.addNewUser;
 import static bohdan.webchat.DAO.UserDAO.findUserByName;
 import static bohdan.webchat.DAO.UserDAO.userRegisterControl;
+import static bohdan.webchat.severControls.ChatServer.setOfConnections;
 import static bohdan.webchat.severControls.ChatServer.writers;
 
 /**
@@ -34,12 +37,14 @@ public class ClientHandler extends Thread {
         try {
             objectOutputS = new ObjectOutputStream(socket.getOutputStream());
             objectInputS = new ObjectInputStream(socket.getInputStream());
+            writers.add(objectOutputS);
         } catch (IOException e) {
             System.out.println("Stream failed");
         }
 
     }
 
+    @Override
     public void run() {
         System.out.println("new socked connected");
         try {
@@ -47,10 +52,10 @@ public class ClientHandler extends Thread {
                 obj = objectInputS.readObject();
                 if (obj instanceof LoginRequest) {
                     LoginResponse response = userIdentification();
-                    System.out.println(response.toString() + "в ране");
 
                     objectOutputS.writeObject(response);
                     objectOutputS.flush();
+                    System.out.println(response.toString() + "в ране");
                 }
                 if (obj instanceof RegistrationRequest) {
                     RegistrationResponse registresponse = userRegistration();
@@ -59,7 +64,11 @@ public class ClientHandler extends Thread {
                     objectOutputS.writeObject(registresponse);
                     objectOutputS.flush();
                 }
-                //tellEveryone(MessagesRequest);
+                if (obj instanceof MessageRequest) {
+                    MessageRequest msg = (MessageRequest) obj;
+                    tellEveryone(msg);
+                    System.out.println(msg.toString());
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -107,17 +116,17 @@ public class ClientHandler extends Thread {
         return loginResponse;
     }
 
-        public void tellEveryone(MessagesEntity message) {
+    public void tellEveryone(MessageRequest msg) {
+        Iterator<ObjectOutputStream> iter = writers.iterator();
+        while (iter.hasNext()) {
             try {
-                Iterator<ObjectOutputStream> iter = writers.iterator();
-                while (iter.hasNext()) {
-                    objectOutputS.writeObject(message);
-                    objectOutputS.flush();
-                }
-            } catch (Exception ex) {
-                System.out.println("Getting the client name and message failed!" + ex.getMessage());
+                ObjectOutputStream out = iter.next();
+                out.writeObject(msg);
+                out.flush();
+                addMessages(msg);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
-
-
     }
+}

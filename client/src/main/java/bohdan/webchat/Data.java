@@ -1,14 +1,20 @@
 package bohdan.webchat;
 
-import java.io.*;
-
 /**
  * Created by Monteg on 12.03.2017.
  */
 public class Data {
     public static String host = "127.0.0.1";      // = "127.0.0.1"
     public static int port = 7707;         // = 7707
-    public static String name;
+    private static String name;
+
+    public static String getName() {
+        return name;
+    }
+
+    public static void setName(String name) {
+        Data.name = name;
+    }
 
     /*public static String getHost() {
         return host;

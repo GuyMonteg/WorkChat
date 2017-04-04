@@ -50,11 +50,11 @@
       </Button>
       <TextField layoutX="967.0" layoutY="125.0" prefHeight="41.0" prefWidth="216.0" promptText="username" />
       <SplitMenuButton layoutX="1051.0" layoutY="17.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="145.0" text="Your status">
-        <items>
-          <MenuItem mnemonicParsing="false" text="Online" />
-          <MenuItem mnemonicParsing="false" text="Invisible" />
+         <items>
+            <MenuItem mnemonicParsing="false" text="Online" />
+            <MenuItem mnemonicParsing="false" text="Invisible" />
             <MenuItem mnemonicParsing="false" text="Away" />
-        </items>
+         </items>
       </SplitMenuButton>
       <Label fx:id="userStatus" alignment="CENTER" layoutX="16.0" layoutY="97.0" prefHeight="24.0" prefWidth="158.0" styleClass="label-username" text="User name">
          <font>

@@ -2,6 +2,9 @@ package bohdan.webchat.DAO;
 
 import static bohdan.webchat.severControls.DBConnection.getDBConnections;
 import bohdan.webchat.entity.MessagesEntity;
+import bohdan.webchat.messageBeans.MessageRequest;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
 
@@ -11,7 +14,7 @@ import java.sql.*;
  */
 public class MessagesDAO {
 
-    public static void addMessages(MessagesEntity mtd) {
+    public static void addMessages(MessageRequest mtd) {
         String inToDB = "INSERT INTO messages VALUES (?, ?, ?)";
         Connection conn = getDBConnections();
 
@@ -63,8 +66,10 @@ public class MessagesDAO {
     }
 
     public List<String> getMessagesByDate(Date date) {      // в листе не стринг должен быть
+        ArrayList<String> messageList = new ArrayList<>();
         Connection conn = getDBConnections();
-        String z2 = "SELECT * FROM messages WHERE message_time = " + date;      //Дописать что бы последних 20 сообщ
+        //String z2 = "SELECT * FROM messages WHERE message_time = " + date;
+        String z2 = "SELECT * FROM messages";    //Дописать что бы последних 20 сообщ
         ResultSet rs = null;
 
         try (PreparedStatement ps = conn.prepareStatement(z2)) {
@@ -73,7 +78,8 @@ public class MessagesDAO {
                 String authorM = rs.getString("author");
                 String  messageT = rs.getString("mesage_text");
                 String time = rs.getString("message_time");
-                System.out.println(authorM + " : " + messageT + "  " + time);
+                messageList.add(authorM + " : " + messageT + "  " + time);
+                //System.out.println(authorM + " : " + messageT + "  " + time);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -89,6 +95,6 @@ public class MessagesDAO {
                 e.printStackTrace();
             }
         }
-        return null;  // need not null
+        return messageList;  // need not null
     }
 }

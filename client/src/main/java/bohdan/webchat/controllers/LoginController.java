@@ -3,6 +3,7 @@ package bohdan.webchat.controllers;
 import bohdan.webchat.*;
 import bohdan.webchat.loginBeans.LoginRequest;
 import bohdan.webchat.loginBeans.LoginResponse;
+import bohdan.webchat.messageBeans.MessageRequest;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -57,10 +58,11 @@ public class LoginController {
                     UserWController usernameC = loader.getController();     //take user name and put it in main window
                     usernameC.setUserStatus(name.getText());
                     usernameC.listDemostrate();
+                    Data.setName(name.getText());
 
                     Scene scena = new Scene(userW, 1280.0, 768.0);
                     stage.setScene(scena);
-                    stage.setTitle(Data.name);
+                    stage.setTitle(Data.getName());
                     stage.show();
                 }
                 if (lr.getStatus().equals(ConnectingStatus.WRONGNAME)) {

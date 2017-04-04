@@ -13,12 +13,13 @@ import java.util.Set;
  */
 
 public class ChatServer {
-    public static Set<ClientHandler> setOfConnections =
-            Collections.synchronizedSet(new HashSet<ClientHandler>());
-    public static Set<ObjectOutputStream> writers =
-            Collections.synchronizedSet(new HashSet<ObjectOutputStream>());
+    public static Set<ClientHandler> setOfConnections;
+    public static Set<ObjectOutputStream> writers;
 
-    public ChatServer() { }
+    public ChatServer() {
+        setOfConnections = Collections.synchronizedSet(new HashSet<ClientHandler>());
+        writers = Collections.synchronizedSet(new HashSet<ObjectOutputStream>());
+    }
 
     public void go() {
         ServerSocket serverSock = null;
@@ -32,6 +33,7 @@ public class ChatServer {
                 System.out.println(clientSocket.getInetAddress() + " : " + clientSocket.getPort());
 
                 ClientHandler receiver = new ClientHandler(clientSocket);
+                //setOfConnections.add(clientSocket);
                 setOfConnections.add(receiver);
                 receiver.start();
             }

@@ -4,14 +4,14 @@ import java.io.Serializable;
 import java.sql.Date;
 
 /**
- * Created by Monteg on 31.03.2017.
+ * Created by Monteg on 02.04.2017.
  */
-public class MessageRequest implements Serializable {
+public class MessageResponse implements Serializable{
     private String author;
     private String messageText;
     private Date date;
 
-    public MessageRequest() { }
+    public MessageResponse() { }
 
     public String getAuthor() {
         return author;
