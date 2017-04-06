@@ -4,6 +4,8 @@ import bohdan.webchat.Data;
 import bohdan.webchat.Main;
 import bohdan.webchat.messageBeans.MessageRequest;
 import bohdan.webchat.messageBeans.MessageResponse;
+import bohdan.webchat.messageBeans.MessagesList;
+import com.sun.org.apache.xml.internal.security.algorithms.MessageDigestAlgorithm;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -17,6 +19,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import javafx.collections.ObservableList;
@@ -38,6 +41,7 @@ public class UserWController {
     @FXML private ListView<String> listView;
 
     public UserWController() {
+        //takeMessagesList();
         receivedM();
     }
 
@@ -94,6 +98,19 @@ public class UserWController {
         };
         msgrsgThread.start();
     }
+
+    /*public void takeMessagesList() {
+        MessageRequest list = null;
+        try {
+            ObjectInputStream read = Main.readStream;
+            list = (MessageRequest) read.readObject();
+                textArea.appendText(list.toString() + "\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }*/
 
     public void enterPressed(KeyEvent key) {
         if (key.getCode().toString().equals("ENTER")) {

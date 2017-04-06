@@ -101,7 +101,7 @@ public class LoginController {
         ConnectControllerW ccW = loading.getController();
         //ccW.lastPropertiesSet();
 
-        Scene scena = new Scene(connW, 310.0, 231.0);
+        Scene scena = new Scene(connW, 393.0, 270.0);
         stage.setScene(scena);
         stage.setResizable(false);
         stage.setTitle("Settings");
@@ -112,7 +112,7 @@ public class LoginController {
         Stage stage = new Stage();
         FXMLLoader loading = new FXMLLoader(getClass().getResource("/fxml/registerWindow.fxml"));
         Parent connW = loading.load();
-        Scene scena = new Scene(connW, 509.0, 278.0);
+        Scene scena = new Scene(connW, 585.0, 335.0);
         stage.setScene(scena);
         stage.setResizable(false);
         stage.setTitle("Registration");

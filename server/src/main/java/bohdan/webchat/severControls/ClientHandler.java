@@ -7,15 +7,18 @@ import bohdan.webchat.loginBeans.LoginRequest;
 import bohdan.webchat.loginBeans.LoginResponse;
 import bohdan.webchat.messageBeans.MessageRequest;
 import bohdan.webchat.messageBeans.MessageResponse;
+import bohdan.webchat.messageBeans.MessagesList;
 import bohdan.webchat.registrationnBeans.RegistrationRequest;
 import bohdan.webchat.registrationnBeans.RegistrationResponse;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import static bohdan.webchat.DAO.MessagesDAO.addMessages;
+import static bohdan.webchat.DAO.MessagesDAO.getMessagesByDate;
 import static bohdan.webchat.DAO.UserDAO.addNewUser;
 import static bohdan.webchat.DAO.UserDAO.findUserByName;
 import static bohdan.webchat.DAO.UserDAO.userRegisterControl;
@@ -56,6 +59,8 @@ public class ClientHandler extends Thread {
                     objectOutputS.writeObject(response);
                     objectOutputS.flush();
                     System.out.println(response.toString() + "в ране");
+
+                    //viewMessagesList();
                 }
                 if (obj instanceof RegistrationRequest) {
                     RegistrationResponse registresponse = userRegistration();
@@ -129,4 +134,16 @@ public class ClientHandler extends Thread {
             }
         }
     }
+
+    /*public void viewMessagesList() {
+        ArrayList<MessageRequest> list = getMessagesByDate();
+        for (MessageRequest m : list) {
+            try {
+                objectOutputS.writeObject(m);
+                objectOutputS.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }*/
 }

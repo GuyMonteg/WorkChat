@@ -1,48 +1,80 @@
 .root
 {
-    -fx-font-family      : sans-serif;
-    -fx-background-color : linear-gradient(to bottom, #517fa4, #13547a);
+    -fx-font-family: 'Titillium Web', sans-serif;
+    -fx-background-color : #295988;
 }
 
-.button {
-    -fx-background-color : #3498db;
-    -fx-text-fill : #000000;
-}
-
-.button: hover {
-    -fx-background-color : #ADD100;
+.button-login {
+    -fx-font-family: 'Titillium Web', sans-serif;
+    -fx-background-color : #29B6F6;                 /*#ADD100;*/
     -fx-text-fill : white;
+    -fx-font-size: 21;
+    -fx-font-weight: bold;
+}
+
+.button-register {
+    -fx-font-family: 'Titillium Web', sans-serif;
+    -fx-background-color : #29B6F6;                 /*#9b59b6;*/
+    -fx-text-fill : white;
+    -fx-font-size: 21;
+    -fx-font-weight: bold;
+}
+
+.button-login: hover {
+    -fx-font-family: 'Titillium Web', sans-serif;
+    -fx-background-color : #ADD100;                 /*#3498db*/
+    -fx-text-fill : white;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+}
+
+.button-register: hover {
+    -fx-font-family: 'Titillium Web', sans-serif;
+    -fx-background-color : #9C27B0;
+    -fx-text-fill : white;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
 }
 
 .label {
+    -fx-font-family: 'Titillium Web', sans-serif;
     -fx-text-fill : #A7BEE5;
+    -fx-font-size: 19;
 }
 
 .label-settings {
     -fx-text-fill : #00c6ff;
+    -fx-font-family: 'Titillium Web', sans-serif;
+    -fx-font-size: 19;
 }
 
 .label-settings:hover {
-    -fx-text-fill: #00c6ff;
+    -fx-font-family: 'Titillium Web', sans-serif;
     -fx-text-fill: #ff6a00;
+    -fx-font-size: 19;
 }
 
 .label-connection {
     -fx-text-fill : LimeGreen;
+    -fx-font-size: 16;
 }
 
 .checkbox {
     -fx-text-fill : #A7BEE5;
+    -fx-font-size: 17;
 }
 
 .text-field {
-    -fx-background-color : linear-gradient(to top, #FFFFFF, #ECE9E6);
-    -fx-font-family: serif;
-    -fx-text-fill: #000C40;
-    -fx-font-size: 18;
+    -fx-background-color : #295988;
+    -fx-font-family: 'Titillium Web', sans-serif;
+    -fx-text-fill: white;
+    -fx-font-size: 19;
     -fx-display-caret:true;
 }
 
 .label-mainlogo {
-    -fx-text-fill : #000000;
+    -fx-text-fill : white;
+    -fx-font-family: 'Titillium Web', sans-serif;
+    -fx-font-size: 78;
+    -fx-font-weight: bold;
 }

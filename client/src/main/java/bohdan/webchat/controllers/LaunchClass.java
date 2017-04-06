@@ -16,7 +16,7 @@ public class LaunchClass extends Application {
         Parent root = FXMLLoader.load(getClass().getResource(
                 "/fxml/loginWindow.fxml"));
         primaryStage.setTitle("Login");
-        Scene scene = new Scene(root, 450.0, 315.0);
+        Scene scene = new Scene(root, 939.0, 530.0);
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();

@@ -1,41 +1,59 @@
 .root
 {
     -fx-font-family      : sans-serif;
-    -fx-background-color : linear-gradient(to bottom, #517fa4, #13547a);
+    -fx-background-color : #295988;
 }
 
 .button {
+    -fx-font-family: 'Titillium Web', sans-serif;
     -fx-background-color : #3498db;
-    -fx-text-fill : #000000;
+    -fx-text-fill : white;
+    -fx-font-size: 19;
+    -fx-font-weight: bold;
 }
 
 .button: hover {
+    -fx-font-family: 'Titillium Web', sans-serif;
     -fx-background-color : #ADD100;
     -fx-text-fill : white;
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
 }
 
 .button-cancel {
+    -fx-font-family: 'Titillium Web', sans-serif;
     -fx-background-color : #3498db;
-    -fx-text-fill : #000000;
+    -fx-text-fill : white;
+    -fx-font-size: 19;
+    -fx-font-weight: bold;
 }
 
 .button-cancel: hover {
+    -fx-font-family: 'Titillium Web', sans-serif;
     -fx-background-color : #ff6a00;
     -fx-text-fill : white;
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
 }
 
 .label {
+    -fx-font-family: 'Titillium Web', sans-serif;
+    -fx-font-size: 19;
     -fx-text-fill : white;
+    -fx-font-weight: bold;
 }
 
 .label-info {
+    -fx-font-family: 'Titillium Web', sans-serif;
     -fx-text-fill: #A7BEE5;
+    -fx-font-size: 17;
+    -fx-font-weight: normal;
 }
 
 .text-field {
-    -fx-background-color : linear-gradient(to top, #FFFFFF, #ECE9E6);
-    -fx-font-family: serif;
-    -fx-text-fill: #000C40;
+    -fx-background-color : #295988;
+    -fx-font-family: 'Titillium Web', sans-serif;
+    -fx-text-fill: white;
     -fx-font-size: 18;
     -fx-display-caret:true;
 }

@@ -65,8 +65,8 @@ public class MessagesDAO {
         return null;        // need not null
     }
 
-    public List<String> getMessagesByDate(Date date) {      // в листе не стринг должен быть
-        ArrayList<String> messageList = new ArrayList<>();
+    public static ArrayList<MessageRequest> getMessagesByDate() {      // (Date date) в листе не стринг должен быть
+        ArrayList<MessageRequest> messageList = new ArrayList<>();
         Connection conn = getDBConnections();
         //String z2 = "SELECT * FROM messages WHERE message_time = " + date;
         String z2 = "SELECT * FROM messages";    //Дописать что бы последних 20 сообщ
@@ -77,8 +77,14 @@ public class MessagesDAO {
             while (rs.next()) {
                 String authorM = rs.getString("author");
                 String  messageT = rs.getString("mesage_text");
-                String time = rs.getString("message_time");
-                messageList.add(authorM + " : " + messageT + "  " + time);
+                Date time = rs.getDate("message_time");
+
+                MessageRequest messageRequest = new MessageRequest();
+                messageRequest.setAuthor(authorM);
+                messageRequest.setMessageText(messageT);
+                messageRequest.setDate(time);
+
+                messageList.add(messageRequest);
                 //System.out.println(authorM + " : " + messageT + "  " + time);
             }
         } catch (SQLException e) {

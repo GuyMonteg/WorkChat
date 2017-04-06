@@ -1,34 +1,44 @@
 .root
 {
     -fx-font-family      : sans-serif;
-    -fx-background-color : linear-gradient(to bottom, #517fa4, #13547a);
+    -fx-background-color : #295988;
 }
 
 .button {
     -fx-background-color : #3498db;
-    -fx-text-fill : #000000;
-    -fx-font-family: serif;
+    -fx-font-family: 'Titillium Web', sans-serif;
+    -fx-text-fill: white;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
 }
 
 .button: hover {
     -fx-background-color : #ADD100;
-    -fx-text-fill : white;
-    -fx-font-family: serif;
-    -fx-font-size: 14pt;
+    -fx-font-family: 'Titillium Web', sans-serif;
+    -fx-text-fill: white;
+    -fx-font-size: 19;
+    -fx-font-weight: bold;
 }
 
 .label {
-    -fx-text-fill : white;
+    -fx-font-family: 'Titillium Web', sans-serif;
+    -fx-text-fill: white;
+    -fx-font-size: 20;
+
 }
 
 .label-server {
     -fx-text-fill: white;
+    -fx-font-family: 'Titillium Web', sans-serif;
+    -fx-text-fill: white;
+    -fx-font-size: 35;
+    -fx-font-weight: bold;
 }
 
 .text-field {
-    -fx-background-color : linear-gradient(to top, #FFFFFF, #ECE9E6);
-    -fx-font-family: serif;
-    -fx-text-fill: #000C40;
-    -fx-font-size: 18;
+    -fx-background-color : #295988;
+    -fx-font-family: 'Titillium Web', sans-serif;
+    -fx-text-fill: white;
+    -fx-font-size: 20;
     -fx-display-caret:true;
 }
