@@ -50,7 +50,6 @@ public class ClientHandler extends Thread {
                 obj = objectInputS.readObject();
                 if (obj instanceof LoginRequest) {
                     LoginResponse response = userIdentification();
-
                     objectOutputS.writeObject(response);
                     objectOutputS.flush();
                     System.out.println(response.toString() + "в ране");
@@ -62,7 +61,6 @@ public class ClientHandler extends Thread {
                 if (obj instanceof RegistrationRequest) {
                     RegistrationResponse registresponse = userRegistration();
                     System.out.println(registresponse.toString());
-
                     objectOutputS.writeObject(registresponse);
                     objectOutputS.flush();
                 }
@@ -82,7 +80,6 @@ public class ClientHandler extends Thread {
 
     private RegistrationResponse userRegistration() {
         RegistrationResponse registrationResp = new RegistrationResponse();
-
         RegistrationRequest registrationReq = (RegistrationRequest) obj;
         System.out.println(registrationReq.toString());
         boolean verificationOf = userRegisterControl(registrationReq.getUsername());
@@ -102,20 +99,19 @@ public class ClientHandler extends Thread {
 
     public LoginResponse userIdentification() {
         LoginResponse loginResponse = new LoginResponse();
-            LoginRequest loginRequest = (LoginRequest) obj;
-            System.out.println(loginRequest.toString());
-            UsersEntity user = findUserByName(loginRequest.getUsername());
-            if (user != null) {
-                if (user.getPassword().equals(loginRequest.getUserpassword())) {
-
-                    loginResponse.setStatus(ConnectingStatus.OK);
-                    System.out.println(loginResponse.getStatus());
-                } else {
-                    loginResponse.setStatus(ConnectingStatus.WRONGPASS);
-                }
+        LoginRequest loginRequest = (LoginRequest) obj;
+        System.out.println(loginRequest.toString());
+        UsersEntity user = findUserByName(loginRequest.getUsername());
+        if (user != null) {
+            if (user.getPassword().equals(loginRequest.getUserpassword())) {
+                loginResponse.setStatus(ConnectingStatus.OK);
+                System.out.println(loginResponse.getStatus());
             } else {
-                loginResponse.setStatus(ConnectingStatus.WRONGNAME);
+                loginResponse.setStatus(ConnectingStatus.WRONGPASS);
             }
+        } else {
+            loginResponse.setStatus(ConnectingStatus.WRONGNAME);
+        }
         return loginResponse;
     }
 

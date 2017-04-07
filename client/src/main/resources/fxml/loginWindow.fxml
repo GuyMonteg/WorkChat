@@ -69,8 +69,8 @@
             <Font name="System Bold" size="38.0" />
          </font>
       </Text>
-      <Separator layoutX="558.0" layoutY="172.0" prefHeight="3.0" prefWidth="308.0" />
-      <Separator layoutX="558.0" layoutY="259.0" prefHeight="3.0" prefWidth="308.0" />
+      <Separator layoutX="559.0" layoutY="166.0" prefHeight="3.0" prefWidth="308.0" />
+      <Separator layoutX="558.0" layoutY="253.0" prefHeight="3.0" prefWidth="308.0" />
       <Label layoutX="559.0" layoutY="500.0" prefHeight="27.0" prefWidth="147.0" text="Visit our website!">
          <font>
             <Font size="18.0" />

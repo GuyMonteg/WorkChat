@@ -11,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -22,12 +21,13 @@ import java.time.LocalDate;
 /**
  * Created by Monteg on 11.03.2017.
  */
+
 public class UserWController {
     private String name;
     private ObservableList<String> obListOfUsers;
     private Socket socket;
 
-    @FXML private TextField message;
+    @FXML private TextArea message;
     @FXML private Button send;
     @FXML private TextArea textArea;
     @FXML private Label userStatus;
@@ -36,13 +36,6 @@ public class UserWController {
 
     public UserWController() {
         receivedM();
-    }
-
-    @FXML
-    public void listDemostrate() {
-        //ObservableList<String> users = FXCollections.observableArrayList(DBConnection.getUsersList());
-        //listView.setItems(users);
-        //listView.refresh();
     }
 
     @FXML
@@ -61,8 +54,7 @@ public class UserWController {
                 ObjectOutputStream outputStream = Main.writeStream;
                 outputStream.writeObject(messageRequest);
                 outputStream.flush();
-
-                message.setText("");
+                message.clear();
                 message.requestFocus();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -80,7 +72,6 @@ public class UserWController {
                     try {
                         ObjectInputStream readStream = Main.readStream;
                         obj = readStream.readObject();
-
                         if (obj instanceof MessageBean) {
                             MessageBean mb = (MessageBean) obj;
                             textArea.appendText(mb.toString() + "\n");
@@ -103,7 +94,6 @@ public class UserWController {
 
     @FXML
     public void initialize() {
-
     }
 
     public void enterPressed(KeyEvent key) {

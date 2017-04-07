@@ -65,7 +65,6 @@ public class RegisterControllerW {
                             else if (rr.getStatus().equals(ConnectingStatus.EXIST)) {
                                 status.setText("This username already exist!");
                             }
-
                         } else {
                             status.setText("Your passwords do not match!");
                         }

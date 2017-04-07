@@ -27,56 +27,37 @@ public class LoginController {
 
 
     public void whenClickedLogin() {
-        if (!name.getText().isEmpty()) {
-            if (!password.getText().isEmpty()) {
-                LoginRequest loginRequest = new LoginRequest();
-                loginRequest.setUsername(name.getText());
-                loginRequest.setUserpassword(password.getText());
+                if (!name.getText().isEmpty()) {
+                    if (!password.getText().isEmpty()) {
+                        LoginRequest loginRequest = new LoginRequest();
+                        loginRequest.setUsername(name.getText());
+                        loginRequest.setUserpassword(password.getText());
 
-                ObjectOutputStream outputStream = Main.writeStream;
-                try {
-                    outputStream.writeObject(loginRequest);
-                    outputStream.flush();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    System.out.println("Exception when try to write object from login");
-                }
-                LoginResponse lr = receiveObject();
+                        ObjectOutputStream outputStream = Main.writeStream;
+                        try {
+                            outputStream.writeObject(loginRequest);
+                            outputStream.flush();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            System.out.println("Exception when try to write object from login");
+                        }
+                        LoginResponse lr = receiveObject();
 
-                if (lr.getStatus().equals(ConnectingStatus.OK)) {
-                    Stage stage;
-                    stage = (Stage) (name.getScene().getWindow());
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/userWindow.fxml"));
-                    Parent userW = null;
-                    try {
-                        userW = loader.load();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        System.out.println("Exception when try to load fxml loader");
+                        if (lr.getStatus().equals(ConnectingStatus.OK)) {
+                            mainWload();
+                        }
+                        if (lr.getStatus().equals(ConnectingStatus.WRONGNAME)) {
+                            connStatus.setText("Wrong user name !");
+                        }
+                        if (lr.getStatus().equals(ConnectingStatus.WRONGPASS)) {
+                            connStatus.setText("Wrong password !");
+                        }
+                    } else {
+                        connStatus.setText("Please write your password!");
                     }
-
-                    UserWController usernameC = loader.getController();     //take user name and put it in main window
-                    usernameC.setUserStatus(name.getText());
-                    usernameC.listDemostrate();
-                    Data.setName(name.getText());
-
-                    Scene scena = new Scene(userW, 1280.0, 768.0);
-                    stage.setScene(scena);
-                    stage.setTitle(Data.getName());
-                    stage.show();
+                } else {
+                    connStatus.setText("Please write your name!");
                 }
-                if (lr.getStatus().equals(ConnectingStatus.WRONGNAME)) {
-                    connStatus.setText("Wrong user name !");
-                }
-                if (lr.getStatus().equals(ConnectingStatus.WRONGPASS)) {
-                    connStatus.setText("Wrong password !");
-                }
-            } else {
-                connStatus.setText("Please write your password!");
-            }
-        } else {
-            connStatus.setText("Please write your name!");
-        }
     }
 
     public LoginResponse receiveObject() {
@@ -118,6 +99,28 @@ public class LoginController {
         stage.setResizable(false);
         stage.setTitle("Registration");
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
+    }
+
+    public void mainWload() {
+        Stage stage;
+        stage = (Stage) (name.getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/userWindow.fxml"));
+        Parent userW = null;
+        try {
+            userW = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Exception when try to load fxml loader");
+        }
+
+        UserWController usernameC = loader.getController();     //take user name and put it in main window
+        usernameC.setUserStatus(name.getText());
+        Data.setName(name.getText());
+
+        Scene scena = new Scene(userW, 1280.0, 768.0);
+        stage.setScene(scena);
+        stage.setTitle(Data.getName());
         stage.show();
     }
 

@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -12,23 +18,23 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
 <?import java.net.URL?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bohdan.webchat.controllers.UserWController">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bohdan.webchat.controllers.UserWController">
    <stylesheets>
-      <URL value="@../styles/userWindowStyle.css"/>
+      <URL value="@../styles/userWindowStyle.css" />
    </stylesheets>
    <children>
-      <TextArea fx:id="textArea" editable="false" layoutX="14.0" layoutY="125.0" prefHeight="540.0" prefWidth="944.0" promptText="Hello!">
+      <TextArea fx:id="textArea" editable="false" layoutX="14.0" layoutY="125.0" prefHeight="540.0" prefWidth="944.0" promptText="Hello!" wrapText="true">
          <font>
             <Font name="Times New Roman Bold" size="20.0" />
          </font>
       </TextArea>
-      <TextField fx:id="message" alignment="TOP_LEFT" layoutX="14.0" layoutY="673.0" onKeyPressed="#enterPressed" prefHeight="86.5" prefWidth="820.0" promptText="message text">
+      <TextArea fx:id="message" editable="true" wrapText="true" layoutX="14.0" layoutY="673.0" prefHeight="86.5" prefWidth="820.0" promptText="message text">
          <font>
             <Font name="Times New Roman" size="18.0" />
          </font>
-      </TextField>
+      </TextArea>
       <ListView fx:id="listView" layoutX="967.0" layoutY="174.0" prefHeight="586.0" prefWidth="296.0" styleClass="list-view" />
       <ScrollBar layoutX="1244.0" layoutY="174.0" orientation="VERTICAL" prefHeight="586.0" prefWidth="18.0" />
       <Button fx:id="send" layoutX="842.0" layoutY="673.0" mnemonicParsing="false" onAction="#buttonSended" onKeyPressed="#enterPressed" prefHeight="85.0" prefWidth="116.0">
@@ -76,7 +82,7 @@
             <Image url="@../images/defaultUser.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="logOut" onMouseClicked="#logOutMainW" fitHeight="48.0" fitWidth="47.0" layoutX="1215.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="logOut" fitHeight="48.0" fitWidth="47.0" layoutX="1215.0" layoutY="9.0" onMouseClicked="#logOutMainW" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/2000px-Human-gnome-session-logout.svg.png" />
          </image>
