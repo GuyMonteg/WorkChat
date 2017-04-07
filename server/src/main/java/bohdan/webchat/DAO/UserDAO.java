@@ -2,6 +2,8 @@ package bohdan.webchat.DAO;
 
 import static bohdan.webchat.severControls.DBConnection.getDBConnections;
 import bohdan.webchat.entity.UsersEntity;
+import bohdan.webchat.userBeans.UserBean;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -27,7 +29,6 @@ public class UserDAO {
                 ue.setEmail(rs.getString(3));
                 return ue;
             }
-
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
@@ -63,9 +64,9 @@ public class UserDAO {
         }
     }
 
-    public static ArrayList<String> getUsersList() {
+    public static UserBean getUsersList() {
         ArrayList<String> list = new ArrayList<>();
-
+        UserBean userBean = new UserBean();
         Connection conn = getDBConnections();
         String takeUsers = "SELECT user_name FROM users";
         ResultSet rs = null;
@@ -76,15 +77,10 @@ public class UserDAO {
                 String userName = rs.getString("user_name");
                 list.add(userName);
             }
+            userBean.setList(list);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        } finally {
-            try {
-                rs.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
-        return list;
+        return userBean;
     }
 }

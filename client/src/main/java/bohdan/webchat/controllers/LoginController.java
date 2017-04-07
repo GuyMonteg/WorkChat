@@ -3,13 +3,13 @@ package bohdan.webchat.controllers;
 import bohdan.webchat.*;
 import bohdan.webchat.loginBeans.LoginRequest;
 import bohdan.webchat.loginBeans.LoginResponse;
-import bohdan.webchat.messageBeans.MessageRequest;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.*;
 
@@ -105,6 +105,7 @@ public class LoginController {
         stage.setScene(scena);
         stage.setResizable(false);
         stage.setTitle("Settings");
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
     }
 
@@ -116,6 +117,7 @@ public class LoginController {
         stage.setScene(scena);
         stage.setResizable(false);
         stage.setTitle("Registration");
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
     }
 

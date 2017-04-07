@@ -51,7 +51,7 @@
       <PasswordField fx:id="password" layoutX="558.0" layoutY="212.0" onKeyPressed="#enterPressed" prefHeight="40.0" prefWidth="308.0" />
       <ImageView fitHeight="543.0" fitWidth="486.0" layoutX="-2.0" layoutY="-1.0" pickOnBounds="true">
          <image>
-            <Image url="@../images/anders-jilden-219256%20copy.jpg" />
+            <Image url="@../images/loginpic.jpg" />
          </image>
       </ImageView>
       <Label layoutX="33.0" layoutY="145.0" prefHeight="103.0" prefWidth="385.0" styleClass="label-mainlogo" text="WorkChat" textFill="WHITE">

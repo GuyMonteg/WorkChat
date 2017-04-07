@@ -2,35 +2,29 @@ package bohdan.webchat.controllers;
 
 import bohdan.webchat.Data;
 import bohdan.webchat.Main;
-import bohdan.webchat.messageBeans.MessageRequest;
-import bohdan.webchat.messageBeans.MessageResponse;
-import bohdan.webchat.messageBeans.MessagesList;
-import com.sun.org.apache.xml.internal.security.algorithms.MessageDigestAlgorithm;
+import bohdan.webchat.messageBeans.MessageBean;
+import bohdan.webchat.userBeans.UserBean;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Calendar;
-
-import javafx.collections.ObservableList;
 
 /**
  * Created by Monteg on 11.03.2017.
  */
 public class UserWController {
     private String name;
-    private String sentMessage;
-    //private String receivedMessage;
+    private ObservableList<String> obListOfUsers;
     private Socket socket;
 
     @FXML private TextField message;
@@ -38,10 +32,9 @@ public class UserWController {
     @FXML private TextArea textArea;
     @FXML private Label userStatus;
     @FXML private ImageView logOut;
-    @FXML private ListView<String> listView;
+    @FXML private ListView listView;
 
     public UserWController() {
-        //takeMessagesList();
         receivedM();
     }
 
@@ -61,7 +54,7 @@ public class UserWController {
     public void buttonSended() {
         if (!message.getText().isEmpty()) {
             try {
-                MessageRequest messageRequest = new MessageRequest();
+                MessageBean messageRequest = new MessageBean();
                 messageRequest.setAuthor(Data.getName());
                 messageRequest.setMessageText(message.getText());
                 messageRequest.setDate(Date.valueOf(LocalDate.now()));
@@ -83,13 +76,22 @@ public class UserWController {
             @Override
             public void run() {
                 while (true) {
-                    MessageRequest mr = null;
+                    Object obj = null;
                     try {
                         ObjectInputStream readStream = Main.readStream;
-                        mr = (MessageRequest) readStream.readObject();
+                        obj = readStream.readObject();
 
-                        textArea.appendText(mr.toString() + "\n");
-                        System.out.println("in receiveM " + mr.toString());
+                        if (obj instanceof MessageBean) {
+                            MessageBean mb = (MessageBean) obj;
+                            textArea.appendText(mb.toString() + "\n");
+                            System.out.println("in receiveM " + mb.toString());
+                        }
+                        if (obj instanceof UserBean) {
+                            UserBean ub = (UserBean) obj;
+                            obListOfUsers = FXCollections.observableArrayList(ub.getList());
+                            listView.setItems(obListOfUsers);
+                            //listView.setCellFactory();
+                        }
                     } catch (IOException | ClassNotFoundException e) {
                         e.printStackTrace();
                     }
@@ -99,18 +101,10 @@ public class UserWController {
         msgrsgThread.start();
     }
 
-    /*public void takeMessagesList() {
-        MessageRequest list = null;
-        try {
-            ObjectInputStream read = Main.readStream;
-            list = (MessageRequest) read.readObject();
-                textArea.appendText(list.toString() + "\n");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }*/
+    @FXML
+    public void initialize() {
+
+    }
 
     public void enterPressed(KeyEvent key) {
         if (key.getCode().toString().equals("ENTER")) {
@@ -122,17 +116,5 @@ public class UserWController {
     public void logOutMainW() throws IOException {
         Platform.exit();
         System.exit(0);
-
-        /*Stage stage2 = new Stage();
-        FXMLLoader loading = new FXMLLoader(getClass().getResource("../fxml/loginWindow.fxml"));
-        Parent connW = loading.load();
-        Scene scena = new Scene(connW, 450.0, 315.0);
-        scena.getStylesheets().add(0,
-                "file:///D://Hrygorovoch//WorkChatProject//src//main//resources//styles//loginWindowStyle.css");
-        stage2.setScene(scena);
-        stage2.setResizable(false);
-        stage2.setTitle("Registration");
-        stage2.show();*/
     }
-
 }

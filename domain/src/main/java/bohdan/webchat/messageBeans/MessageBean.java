@@ -6,12 +6,19 @@ import java.sql.Date;
 /**
  * Created by Monteg on 31.03.2017.
  */
-public class MessageRequest implements Serializable {
+
+public class MessageBean implements Serializable {
     private String author;
     private String messageText;
     private Date date;
 
-    public MessageRequest() { }
+    public MessageBean() {}
+
+    public MessageBean(String author, String messageText, Date date) {
+        this.author = author;
+        this.messageText = messageText;
+        this.date = date;
+    }
 
     public String getAuthor() {
         return author;

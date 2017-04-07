@@ -1,8 +1,8 @@
 package bohdan.webchat.DAO;
 
 import static bohdan.webchat.severControls.DBConnection.getDBConnections;
-import bohdan.webchat.entity.MessagesEntity;
-import bohdan.webchat.messageBeans.MessageRequest;
+
+import bohdan.webchat.messageBeans.MessageBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ import java.sql.*;
  */
 public class MessagesDAO {
 
-    public static void addMessages(MessageRequest mtd) {
+    public static void addMessages(MessageBean mtd) {
         String inToDB = "INSERT INTO messages VALUES (?, ?, ?)";
         Connection conn = getDBConnections();
 
@@ -26,12 +26,6 @@ public class MessagesDAO {
             System.out.println("Insert of message is OK");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -50,23 +44,12 @@ public class MessagesDAO {
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        } finally {
-            try {
-                rs.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
-        return null;        // need not null
+        return null;
     }
 
-    public static ArrayList<MessageRequest> getMessagesByDate() {      // (Date date) в листе не стринг должен быть
-        ArrayList<MessageRequest> messageList = new ArrayList<>();
+    public static ArrayList<MessageBean> getMessagesByDate() {
+        ArrayList<MessageBean> messageList = new ArrayList<>();
         Connection conn = getDBConnections();
         //String z2 = "SELECT * FROM messages WHERE message_time = " + date;
         String z2 = "SELECT * FROM messages";    //Дописать что бы последних 20 сообщ
@@ -78,29 +61,11 @@ public class MessagesDAO {
                 String authorM = rs.getString("author");
                 String  messageT = rs.getString("mesage_text");
                 Date time = rs.getDate("message_time");
-
-                MessageRequest messageRequest = new MessageRequest();
-                messageRequest.setAuthor(authorM);
-                messageRequest.setMessageText(messageT);
-                messageRequest.setDate(time);
-
-                messageList.add(messageRequest);
-                //System.out.println(authorM + " : " + messageT + "  " + time);
+                messageList.add(new MessageBean(authorM, messageT, time));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        } finally {
-            try {
-                rs.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
-        return messageList;  // need not null
+        return messageList;
     }
 }
