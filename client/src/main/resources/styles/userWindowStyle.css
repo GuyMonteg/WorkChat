@@ -1,7 +1,7 @@
 .root
 {
     -fx-font-family      : sans-serif;
-    -fx-background-color : linear-gradient(to bottom, #517fa4, #243949);
+    -fx-background-color : #295988;
 }
 
 .button {
@@ -41,10 +41,22 @@
     -fx-display-caret:true;
 }
 
+.label-logo {
+    -fx-text-fill: white;
+    -fx-font-family: 'Titillium Web', sans-serif;
+    -fx-font-size: 95;
+    -fx-font-weight: bold;
+}
+
 .label-username {
     -fx-text-fill: white;
+    -fx-font-family: 'Titillium Web', sans-serif;
+    -fx-font-size: 24;
+    -fx-font-weight: 600;
 }
 
 .list-view{
     -fx-background-color: linear-gradient(to bottom, #EDE574 , #E1F5C4);
+    -fx-font-family: 'Titillium Web', sans-serif;
+    -fx-font-size: 19;
 }

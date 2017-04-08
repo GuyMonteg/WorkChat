@@ -67,26 +67,26 @@ public class UserWController {
         Thread msgrsgThread = new Thread() {
             @Override
             public void run() {
-                while (true) {
-                    Object obj = null;
-                    try {
-                        ObjectInputStream readStream = Main.readStream;
-                        obj = readStream.readObject();
-                        if (obj instanceof MessageBean) {
-                            MessageBean mb = (MessageBean) obj;
-                            textArea.appendText(mb.toString() + "\n");
-                            System.out.println("in receiveM " + mb.toString());
-                        }
-                        if (obj instanceof UserBean) {
-                            UserBean ub = (UserBean) obj;
-                            obListOfUsers = FXCollections.observableArrayList(ub.getList());
-                            listView.setItems(obListOfUsers);
-                            //listView.setCellFactory();
-                        }
-                    } catch (IOException | ClassNotFoundException e) {
-                        e.printStackTrace();
+            while (true) {
+                Object obj = null;
+                try {
+                    ObjectInputStream readStream = Main.readStream;
+                    obj = readStream.readObject();
+                    if (obj instanceof MessageBean) {
+                        MessageBean mb = (MessageBean) obj;
+                        textArea.appendText(mb.toString() + "\n");
+                        System.out.println("in receiveM " + mb.toString());
                     }
+                    if (obj instanceof UserBean) {
+                        UserBean ub = (UserBean) obj;
+                        obListOfUsers = FXCollections.observableArrayList(ub.getList());
+                        listView.setItems(obListOfUsers);
+                        //listView.setCellFactory();
+                    }
+                } catch (IOException | ClassNotFoundException e) {
+                    e.printStackTrace();
                 }
+            }
             }
         };
         msgrsgThread.start();
