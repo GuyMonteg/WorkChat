@@ -3,6 +3,7 @@ package bohdan.webchat.controllers;
 import bohdan.webchat.Data;
 import bohdan.webchat.Main;
 import bohdan.webchat.messageBeans.MessageBean;
+import bohdan.webchat.messageBeans.MessageListBean;
 import bohdan.webchat.userBeans.UserBean;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -17,6 +18,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  * Created by Monteg on 11.03.2017.
@@ -31,7 +33,7 @@ public class UserWController {
     @FXML private TextArea textArea;
     @FXML private Label userStatus;
     @FXML private ImageView logOut;
-    @FXML private ListView listView;
+    @FXML private ListView<String> listView;
 
     public UserWController() {
         receivedM();
@@ -76,10 +78,18 @@ public class UserWController {
                         textArea.appendText(mb.toString() + "\n");
                         System.out.println("in receiveM " + mb.toString());
                     }
+                    if (obj instanceof MessageListBean) {
+                        MessageListBean mlb = (MessageListBean) obj;
+                        ArrayList<MessageBean> listM = mlb.getList();
+                        for (MessageBean m : listM) {
+                            textArea.appendText(m.toString() + "\n");
+                        }
+                    }
                     if (obj instanceof UserBean) {
                         UserBean ub = (UserBean) obj;
                         obListOfUsers = FXCollections.observableArrayList(ub.getList());
                         listView.setItems(obListOfUsers);
+                        listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
                         //listView.setCellFactory();
                     }
                 } catch (IOException | ClassNotFoundException e) {

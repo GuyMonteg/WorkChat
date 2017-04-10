@@ -5,6 +5,7 @@ import bohdan.webchat.entity.UsersEntity;
 import bohdan.webchat.loginBeans.LoginRequest;
 import bohdan.webchat.loginBeans.LoginResponse;
 import bohdan.webchat.messageBeans.MessageBean;
+import bohdan.webchat.messageBeans.MessageListBean;
 import bohdan.webchat.registrationnBeans.RegistrationRequest;
 import bohdan.webchat.registrationnBeans.RegistrationResponse;
 import bohdan.webchat.userBeans.UserBean;
@@ -130,13 +131,13 @@ public class ClientHandler extends Thread {
 
     public void viewMessagesList() {
         ArrayList<MessageBean> list = getMessagesByDate();
-        for (MessageBean m : list) {
-            try {
-                objectOutputS.writeObject(m);
-                objectOutputS.flush();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        MessageListBean listbean = new MessageListBean();
+        listbean.setList(list);
+        try {
+            objectOutputS.writeObject(listbean);
+            objectOutputS.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
