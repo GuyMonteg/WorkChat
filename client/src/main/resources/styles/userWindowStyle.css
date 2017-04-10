@@ -1,62 +1,92 @@
+@import url('https://fonts.googleapis.com/css?family=Dosis:600');
+/* @import url('https://fonts.googleapis.com/css?family=Oleo+Script'); */
+
 .root
 {
-    -fx-font-family      : sans-serif;
-    -fx-background-color : #295988;
+     -fx-font-family: sans-serif;
+    -fx-background-color: #477eb5;
 }
 
 .button {
-    -fx-background-color : #3498db;
-    -fx-text-fill : #2C3E50;
+    -fx-background-color: #295988;
+    -fx-text-fill: #2C3E50;
+}
+
+.button-send {
+    -fx-background-color: #295988;
+    -fx-text-fill:#2C3E50;
+}
+.button-send:pressed
+{
+    -fx-background-color: SteelBlue;
+    -fx-text-fill: white;
 }
 
 .button:pressed
 {
-    -fx-background-color : SteelBlue;
-    -fx-text-fill        : white;
+    -fx-background-color: SteelBlue;
+    -fx-text-fill: white;
+}
+
+.image {
+    -fx-opacity: 0.85;
 }
 
 .text-field {
-    -fx-background-color : linear-gradient(to top, #ECE9E6 , #FFFFFF);
-    -fx-font-family: serif;
-    -fx-text-fill: #000C40;
-    -fx-font-size: 18;
-    -fx-display-caret:true;
-    -fx-border-color: #283048;
-    -fx-border-width:  1;
-    -fx-border-style: solid;
+    -fx-background-color: #295988;
+    -fx-font-family: 'Dosis', sans-serif;
+    -fx-text-fill: white;
+    -fx-font-size: 19;
 }
 
 .text-area .content {
-    -fx-background-color: linear-gradient(to left, #ECE9E6 , #FFFFFF);
-    -fx-text-fill: Indigo;
-    -fx-border-color: #283048 ;
-    -fx-border-width: 1 ;
-    -fx-border-style: solid;
-
-}
-.text-area {
-    -fx-font-family: serif;
     -fx-text-fill: #000C40;
-    -fx-font-size: 19;
+    -fx-background-color: #c3e2ff;
+}
+
+.text-area {
+    -fx-font-family: 'Dosis', sans-serif;
+    -fx-text-fill: #000C40;
+    -fx-font-size: 21;
+}
+
+.text-area-m {
     -fx-display-caret:true;
 }
 
 .label-logo {
     -fx-text-fill: white;
-    -fx-font-family: 'Titillium Web', sans-serif;
-    -fx-font-size: 95;
+    -fx-font-family: 'Oleo Script', cursive;
+    -fx-font-size: 50;
     -fx-font-weight: bold;
 }
 
 .label-username {
     -fx-text-fill: white;
-    -fx-font-family: 'Titillium Web', sans-serif;
+    -fx-font-family: 'Dosis', sans-serif;
     -fx-font-size: 24;
     -fx-font-weight: 600;
 }
 
 .list-view{
-    -fx-background-color: linear-gradient(to bottom, #EDE574 , #E1F5C4);
-    -fx-font-family: 'Titillium Web', sans-serif;
-    -fx-font-size: 19;
+    -fx-background-color: #3b7dc0;
+    -fx-font-family: 'Dosis', sans-serif;
+    -fx-font-size: 18;
+    -fx-text-fill:#004D40;
+    -fx-font-weight: bold;
 }
+
+.list-view .list-cell:even {
+    -fx-background-color: #64B5F6;
+    -fx-text-fill: #004D40;
+}
+
+.list-view .list-cell:odd {
+    -fx-background-color: #4FC3F7;
+    -fx-text-fill: #004D40;
+}
+
+.region {
+    -fx-background-color: #295988;
+}
+

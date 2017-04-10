@@ -10,6 +10,7 @@
     -fx-text-fill : white;
     -fx-font-size: 21;
     -fx-font-weight: bold;
+    -fx-background-radius: 8;
 }
 
 .button-register {
@@ -18,6 +19,7 @@
     -fx-text-fill : white;
     -fx-font-size: 21;
     -fx-font-weight: bold;
+    -fx-background-radius: 8;
 }
 
 .button-login: hover {

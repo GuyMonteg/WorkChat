@@ -25,7 +25,6 @@ import java.time.LocalDate;
 public class UserWController {
     private String name;
     private ObservableList<String> obListOfUsers;
-    private Socket socket;
 
     @FXML private TextArea message;
     @FXML private Button send;

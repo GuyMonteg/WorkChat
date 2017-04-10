@@ -10,6 +10,7 @@
     -fx-text-fill : white;
     -fx-font-size: 19;
     -fx-font-weight: bold;
+    -fx-background-radius: 8;
 }
 
 .button: hover {
@@ -26,6 +27,7 @@
     -fx-text-fill : white;
     -fx-font-size: 19;
     -fx-font-weight: bold;
+    -fx-background-radius: 8;
 }
 
 .button-cancel: hover {
