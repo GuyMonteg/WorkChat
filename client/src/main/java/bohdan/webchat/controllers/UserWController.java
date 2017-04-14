@@ -5,18 +5,17 @@ import bohdan.webchat.Main;
 import bohdan.webchat.messageBeans.MessageBean;
 import bohdan.webchat.messageBeans.MessageListBean;
 import bohdan.webchat.userBeans.UserBean;
+import bohdan.webchat.userBeans.UserListBean;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.Socket;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -27,14 +26,14 @@ import java.util.ArrayList;
 
 public class UserWController {
     private String name;
-    private ObservableList<String> obListOfUsers;
+    private ObservableList<UserBean> obListOfUsers;
 
     @FXML private TextArea message;
     @FXML private Button send;
     @FXML private TextArea textArea;
     @FXML private Label userStatus;
     @FXML private ImageView logOut;
-    @FXML private ListView<String> listView;
+    @FXML private ListView<UserBean> listView;
 
     public UserWController() {
         receivedM();
@@ -86,14 +85,13 @@ public class UserWController {
                             textArea.appendText(m.toString() + "\n");
                         }
                     }
-                    if (obj instanceof UserBean) {
-                        UserBean ub = (UserBean) obj;
+                    if (obj instanceof UserListBean) {
+                        UserListBean ub = (UserListBean) obj;
                         obListOfUsers = FXCollections.observableArrayList(ub.getList());
                         listView.setItems(obListOfUsers);
                         listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
                         //listView.setCellFactory(new PropertyValueFactory<String,>());
                     }
-
                 } catch (IOException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }

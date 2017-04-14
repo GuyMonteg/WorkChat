@@ -1,6 +1,7 @@
 package bohdan.webchat.severControls;
 
 import bohdan.webchat.*;
+import bohdan.webchat.entity.MessagesEntity;
 import bohdan.webchat.entity.UsersEntity;
 import bohdan.webchat.loginBeans.LoginRequest;
 import bohdan.webchat.loginBeans.LoginResponse;
@@ -9,6 +10,7 @@ import bohdan.webchat.messageBeans.MessageListBean;
 import bohdan.webchat.registrationnBeans.RegistrationRequest;
 import bohdan.webchat.registrationnBeans.RegistrationResponse;
 import bohdan.webchat.userBeans.UserBean;
+import bohdan.webchat.userBeans.UserListBean;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -130,9 +132,13 @@ public class ClientHandler extends Thread {
     }
 
     public void viewMessagesList() {
-        ArrayList<MessageBean> list = getMessagesByDate();
+        ArrayList<MessagesEntity> list = getMessagesByDate();
+        ArrayList<MessageBean> mlist = new ArrayList<>();
         MessageListBean listbean = new MessageListBean();
-        listbean.setList(list);
+        for (MessagesEntity me : list) {
+            mlist.add(new MessageBean(me.getAuthor(), me.getMessageText(), me.getDate()));
+        }
+        listbean.setList(mlist);
         try {
             objectOutputS.writeObject(listbean);
             objectOutputS.flush();
@@ -142,9 +148,16 @@ public class ClientHandler extends Thread {
     }
 
     public void viewUsersList() {
-        UserBean list = getUsersList();
+        ArrayList<UsersEntity> list = getUsersList();
+        System.out.println(list.toString());
+        ArrayList<UserBean> userBeans = new ArrayList<>();
+        UserListBean uList = new UserListBean();
+        for (UsersEntity ue : list) {
+            userBeans.add(new UserBean(ue.getUserName()));
+        }
+        uList.setList(userBeans);
         try {
-            objectOutputS.writeObject(list);
+            objectOutputS.writeObject(uList);
             objectOutputS.flush();
         } catch (IOException e) {
             e.printStackTrace();

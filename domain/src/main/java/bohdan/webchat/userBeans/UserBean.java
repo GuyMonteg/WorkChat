@@ -1,30 +1,30 @@
 package bohdan.webchat.userBeans;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
- * Created by Monteg on 07.04.2017.
+ * Created by Monteg on 14.04.2017.
  */
 public class UserBean implements Serializable {
-    private ArrayList<String> list;
+    private String username;
 
-    public UserBean() { }
-
-    public UserBean(ArrayList<String> list) {
-        this.list = list;
+    public UserBean() {
     }
 
-    public ArrayList<String> getList() {
-        return list;
+    public UserBean(String username) {
+        this.username = username;
     }
 
-    public void setList(ArrayList<String> list) {
-        this.list = list;
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override
     public String toString() {
-        return "list=" + list;
+        return username;
     }
 }

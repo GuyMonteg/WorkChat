@@ -2,7 +2,6 @@ package bohdan.webchat.DAO;
 
 import static bohdan.webchat.severControls.DBConnection.getDBConnections;
 import bohdan.webchat.entity.UsersEntity;
-import bohdan.webchat.userBeans.UserBean;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -64,9 +63,8 @@ public class UserDAO {
         }
     }
 
-    public static UserBean getUsersList() {
-        ArrayList<String> list = new ArrayList<>();
-        UserBean userBean = new UserBean();
+    public static ArrayList<UsersEntity> getUsersList() {
+        ArrayList<UsersEntity> list = new ArrayList<>();
         Connection conn = getDBConnections();
         String takeUsers = "SELECT user_name FROM users";
         ResultSet rs = null;
@@ -75,12 +73,11 @@ public class UserDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 String userName = rs.getString("user_name");
-                list.add(userName);
+                list.add(new UsersEntity(userName));
             }
-            userBean.setList(list);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return userBean;
+        return list;
     }
 }

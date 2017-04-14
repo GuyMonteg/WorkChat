@@ -2,6 +2,7 @@ package bohdan.webchat.DAO;
 
 import static bohdan.webchat.severControls.DBConnection.getDBConnections;
 
+import bohdan.webchat.entity.MessagesEntity;
 import bohdan.webchat.messageBeans.MessageBean;
 
 import java.util.ArrayList;
@@ -48,8 +49,8 @@ public class MessagesDAO {
         return null;
     }
 
-    public static ArrayList<MessageBean> getMessagesByDate() {
-        ArrayList<MessageBean> messageList = new ArrayList<>();
+    public static ArrayList<MessagesEntity> getMessagesByDate() {
+        ArrayList<MessagesEntity> messageList = new ArrayList<>();
         Connection conn = getDBConnections();
         //String z2 = "SELECT * FROM messages WHERE message_time = " + date;
         String z2 = "SELECT * FROM messages";    //Дописать что бы последних 20 сообщ
@@ -61,7 +62,7 @@ public class MessagesDAO {
                 String authorM = rs.getString("author");
                 String  messageT = rs.getString("mesage_text");
                 Date time = rs.getDate("message_time");
-                messageList.add(new MessageBean(authorM, messageT, time));
+                messageList.add(new MessagesEntity(authorM, messageT, time));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
