@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
 <?import java.net.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -55,7 +57,7 @@
             <Image url="@../images/2000.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="49.0" fitWidth="56.0" layoutX="1135.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="settings" fitHeight="49.0" fitWidth="56.0" layoutX="1135.0" layoutY="17.0" onMouseClicked="#settingsM" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/settings-5-xxl.png" />
          </image>
@@ -88,5 +90,6 @@
             <Image url="@../images/add.png" />
          </image>
       </ImageView>
+      <JFXDrawer fx:id="drawer" defaultDrawerSize="360.0" direction="RIGHT" focusTraversable="true" layoutX="949.0" layoutY="148.0" overLayVisible="false" pickOnBounds="false" prefHeight="619.0" prefWidth="331.0" />
    </children>
 </AnchorPane>

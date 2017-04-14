@@ -6,28 +6,39 @@ import bohdan.webchat.messageBeans.MessageBean;
 import bohdan.webchat.messageBeans.MessageListBean;
 import bohdan.webchat.userBeans.UserBean;
 import bohdan.webchat.userBeans.UserListBean;
+import com.jfoenix.controls.JFXDrawer;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 /**
  * Created by Monteg on 11.03.2017.
  */
 
-public class UserWController {
+public class UserWController implements Initializable{
     private String name;
     private ObservableList<UserBean> obListOfUsers;
 
+    @FXML private JFXDrawer drawer;
+    @FXML private ImageView settings;
     @FXML private TextArea message;
     @FXML private Button send;
     @FXML private TextArea textArea;
@@ -101,10 +112,6 @@ public class UserWController {
         msgrsgThread.start();
     }
 
-    @FXML
-    public void initialize() {
-    }
-
     public void enterPressed(KeyEvent key) {
         if (key.getCode().toString().equals("ENTER")) {
             buttonSended();
@@ -115,5 +122,29 @@ public class UserWController {
     public void logOutMainW() throws IOException {
         Platform.exit();
         System.exit(0);
+    }
+
+    @FXML
+    public void settingsM() {
+        try {
+            VBox box = FXMLLoader.load(getClass().getResource("/fxml/setBar.fxml"));
+            drawer.setSidePane(box);
+            drawer.setDisable(true);
+
+            if (drawer.isShown()) {
+                drawer.close();
+                drawer.setDisable(true);
+            } else {
+                drawer.open();
+                drawer.setDisable(false);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        drawer.setDisable(true);
     }
 }
