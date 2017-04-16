@@ -1,9 +1,11 @@
 package bohdan.webchat.controllers;
 
+import bohdan.webchat.ConnectingStatus;
 import bohdan.webchat.Data;
 import bohdan.webchat.Main;
 import bohdan.webchat.messageBeans.MessageBean;
 import bohdan.webchat.messageBeans.MessageListBean;
+import bohdan.webchat.userBeans.RenameResponce;
 import bohdan.webchat.userBeans.UserBean;
 import bohdan.webchat.userBeans.UserListBean;
 import com.jfoenix.controls.JFXDrawer;
@@ -103,6 +105,19 @@ public class UserWController implements Initializable{
                         listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
                         //listView.setCellFactory(new PropertyValueFactory<String,>());
                     }
+                    if (obj instanceof RenameResponce) {
+                        RenameResponce rr = (RenameResponce) obj;
+                        System.out.println(rr.getStatus());
+                        /*Alert alert = new Alert(Alert.AlertType.INFORMATION); //почему не работает Alert?
+                        alert.setTitle("Rename result");
+                        alert.setHeaderText(null);
+                        if (rr.getStatus() == ConnectingStatus.OK) {
+                            alert.setContentText("Rename was successful!");
+                        } else {
+                            alert.setContentText("Rename failed!");
+                        }
+                        alert.showAndWait();*/
+                    }
                 } catch (IOException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -119,7 +134,7 @@ public class UserWController implements Initializable{
     }
 
     @FXML
-    public void logOutMainW() throws IOException {
+    public void logOutMainW() {
         Platform.exit();
         System.exit(0);
     }

@@ -1,3 +1,7 @@
+@font-face {
+    src: url("../fonts/TitilliumWeb-SemiBold.ttf");
+}
+
 .root {
     -fx-background-color: #3b7dc0;
 }
@@ -36,8 +40,13 @@
     -fx-font-weight: bold;
 }
 
-.label {
+.label-link {
     -fx-text-fill: white;
+    -fx-font-weight: 700;
+}
+
+.label-link:hover {
+    -fx-text-fill: #64DD17;
     -fx-font-weight: 700;
 }
 

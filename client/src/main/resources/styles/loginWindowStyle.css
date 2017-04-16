@@ -1,3 +1,7 @@
+@font-face {
+    src: url("../fonts/TitilliumWeb-SemiBold.ttf");
+}
+
 .root
 {
     -fx-font-family: 'Titillium Web', sans-serif;
@@ -77,6 +81,6 @@
 .label-mainlogo {
     -fx-text-fill : white;
     -fx-font-family: 'Titillium Web', sans-serif;
-    -fx-font-size: 78;
+    -fx-font-size: 84;
     -fx-font-weight: bold;
 }

@@ -31,12 +31,12 @@
       </AnchorPane>
       <AnchorPane prefHeight="157.0" prefWidth="336.0">
          <children>
-            <Button fx:id="save" layoutX="61.0" layoutY="149.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="97.0" text="Save" />
+            <Button fx:id="save" onAction="#changeAccount" layoutX="61.0" layoutY="149.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="97.0" text="Save" />
             <TextField fx:id="name" layoutX="20.0" layoutY="53.0" prefHeight="37.0" prefWidth="293.0" promptText="new name" />
             <Label layoutX="20.0" layoutY="14.0" prefHeight="25.0" prefWidth="222.0" styleClass="label-edit" text="Edit profile">
             </Label>
             <PasswordField fx:id="password" layoutX="20.0" layoutY="100.0" prefHeight="37.0" prefWidth="293.0" promptText="new password" />
-            <Button fx:id="cancel" layoutX="174.0" layoutY="149.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="97.0" styleClass="button-cancel" text="Cancel" />
+            <Button fx:id="cancel" onAction="#cancelButton" layoutX="174.0" layoutY="149.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="97.0" styleClass="button-cancel" text="Cancel" />
             <ImageView fitHeight="37.0" fitWidth="38.0" layoutX="20.0" layoutY="149.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/success.png" />
@@ -48,7 +48,7 @@
                </image>
             </ImageView>
             <Separator layoutX="1.0" layoutY="222.0" prefHeight="6.0" prefWidth="335.0" />
-            <Label fx:id="info" alignment="CENTER" layoutX="36.0" layoutY="197.0" prefHeight="21.0" prefWidth="266.0" styleClass="label-info" text="Info">
+            <Label fx:id="info" alignment="CENTER" layoutX="36.0" layoutY="197.0" prefHeight="21.0" prefWidth="266.0" styleClass="label-info" text="">
                <font>
                   <Font size="16.0" />
                </font>
@@ -75,7 +75,7 @@
                   <Image url="@../images/closed.png" />
                </image>
             </ImageView>
-            <Label fx:id="emailSending" layoutX="59.0" layoutY="19.0" prefHeight="27.0" prefWidth="266.0" text="Send me email with my account data" />
+            <Label fx:id="emailSending" onMouseClicked="#emailSending" styleClass="label-link" layoutX="59.0" layoutY="19.0" prefHeight="27.0" prefWidth="266.0" text="Send me email with my account data" />
             <Separator layoutX="11.0" layoutY="63.0" prefHeight="6.0" prefWidth="309.0" />
             <ImageView fitHeight="37.0" fitWidth="37.0" layoutX="14.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -83,13 +83,13 @@
                </image>
             </ImageView>
             <Separator layoutX="11.0" layoutY="128.0" prefHeight="6.0" prefWidth="309.0" />
-            <Label fx:id="gitHub" layoutX="59.0" layoutY="83.0" prefHeight="27.0" prefWidth="251.0" text="Check our product on GitHub" />
+            <Label fx:id="gitHub" onMouseClicked="#linksToGitHub" styleClass="label-link" layoutX="59.0" layoutY="83.0" prefHeight="27.0" prefWidth="251.0" text="Check our product on GitHub" />
             <ImageView fitHeight="27.0" fitWidth="37.0" layoutX="19.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/trash.png" />
                </image>
             </ImageView>
-            <Label fx:id="deleteAndLeave" layoutX="59.0" layoutY="148.0" prefHeight="21.0" prefWidth="211.0" text="Delete my account and leave" />
+            <Label fx:id="deleteAndLeave" onMouseClicked="#leaveThisPlace" styleClass="label-link" layoutX="59.0" layoutY="148.0" prefHeight="21.0" prefWidth="211.0" text="Delete my account and leave" />
          </children>
       </AnchorPane>
    </children>

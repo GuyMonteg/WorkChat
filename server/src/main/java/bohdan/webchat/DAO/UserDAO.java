@@ -2,6 +2,9 @@ package bohdan.webchat.DAO;
 
 import static bohdan.webchat.severControls.DBConnection.getDBConnections;
 import bohdan.webchat.entity.UsersEntity;
+import bohdan.webchat.userBeans.UserBean;
+import bohdan.webchat.userBeans.UserDelete;
+import bohdan.webchat.userBeans.UserRename;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -79,5 +82,38 @@ public class UserDAO {
             System.out.println(e.getMessage());
         }
         return list;
+    }
+
+    public static boolean userRename(UserRename rename) {
+        String inToDb = "UPDATE users SET user_name = ?, password = ? WHERE user_name = ?;";
+        //String inToDb2 = "UPDATE messages SET author = ? WHERE author = ?;";
+        Connection dbConn = getDBConnections();
+        boolean result = false;
+        try (PreparedStatement ps = dbConn.prepareStatement(inToDb) /*;
+             PreparedStatement ps2 = dbConn.prepareStatement(inToDb2)*/) {
+            ps.setString(1, rename.getNewName());
+            ps.setString(2, rename.getNewPass());
+            ps.setString(3, rename.getOldName());
+            ps.executeUpdate();
+            result = true;
+            /*ps2.setString(1, rename.getNewName());        //нужно ли обновлять значения во второй таблице если они
+            ps2.setString(2, rename.getOldName());         //привязаны с помощью primary key?
+            ps2.executeUpdate();*/
+        } catch (SQLException e) {
+            e.printStackTrace();
+            result = false;
+        }
+        return result;
+    }
+
+    public static void deleteFromDB(UsersEntity name) {
+        String inToDB = "DELETE FROM users WHERE user_name = ?;"; // нужно ли после делейт *,
+        Connection dbConn = getDBConnections();                  // удалять ли и сообщения этого пользователя
+        try (PreparedStatement ps = dbConn.prepareStatement(inToDB)) {
+            ps.setString(1, name.getUserName());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

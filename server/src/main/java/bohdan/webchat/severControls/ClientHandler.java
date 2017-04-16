@@ -9,8 +9,7 @@ import bohdan.webchat.messageBeans.MessageBean;
 import bohdan.webchat.messageBeans.MessageListBean;
 import bohdan.webchat.registrationnBeans.RegistrationRequest;
 import bohdan.webchat.registrationnBeans.RegistrationResponse;
-import bohdan.webchat.userBeans.UserBean;
-import bohdan.webchat.userBeans.UserListBean;
+import bohdan.webchat.userBeans.*;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -73,6 +72,14 @@ public class ClientHandler extends Thread {
                     addMessages(msg);
                     System.out.println(msg.toString());
                 }
+                if (obj instanceof UserRename) {
+                    RenameResponce rename = renameUser();
+                    objectOutputS.writeObject(rename);
+                    objectOutputS.flush();
+                }
+                if (obj instanceof UserDelete) {
+                    deleteUser();
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -81,7 +88,26 @@ public class ClientHandler extends Thread {
         }
     }
 
-    private RegistrationResponse userRegistration() {
+    public void deleteUser() {
+        UserDelete delete = (UserDelete) obj;
+        UsersEntity entity = new UsersEntity();
+        entity.setUserName(delete.getUsername());
+        deleteFromDB(entity);
+    }
+
+    public RenameResponce renameUser() {
+        RenameResponce renameResponce = new RenameResponce();
+        UserRename rename = (UserRename) obj;
+        boolean verify = userRename(rename);
+        if (verify == true) {
+            renameResponce.setStatus(ConnectingStatus.OK);
+        } else {
+            renameResponce.setStatus(ConnectingStatus.FAIL);
+        }
+        return renameResponce;
+    }
+
+    public RegistrationResponse userRegistration() {
         RegistrationResponse registrationResp = new RegistrationResponse();
         RegistrationRequest registrationReq = (RegistrationRequest) obj;
         System.out.println(registrationReq.toString());
@@ -149,7 +175,6 @@ public class ClientHandler extends Thread {
 
     public void viewUsersList() {
         ArrayList<UsersEntity> list = getUsersList();
-        System.out.println(list.toString());
         ArrayList<UserBean> userBeans = new ArrayList<>();
         UserListBean uList = new UserListBean();
         for (UsersEntity ue : list) {

@@ -1,9 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Dosis:600');
-/* @import url('https://fonts.googleapis.com/css?family=Oleo+Script'); */
+@font-face {
+    src: url("../fonts/Dosis-SemiBold.ttf");
+}
 
-.root
-{
-     -fx-font-family: sans-serif;
+@font-face {
+    src: url("../fonts/TitilliumWeb-SemiBold.ttf");
+}
+
+.root {
     -fx-background-color: #477eb5;
 }
 
@@ -16,14 +19,12 @@
     -fx-background-color: #295988;
     -fx-text-fill:#2C3E50;
 }
-.button-send:pressed
-{
+.button-send:pressed {
     -fx-background-color: SteelBlue;
     -fx-text-fill: white;
 }
 
-.button:pressed
-{
+.button:pressed {
     -fx-background-color: SteelBlue;
     -fx-text-fill: white;
 }
@@ -56,8 +57,8 @@
 
 .label-logo {
     -fx-text-fill: white;
-    -fx-font-family: 'Oleo Script', cursive;
-    -fx-font-size: 50;
+    -fx-font-family: 'Titillium Web', sans-serif;
+    -fx-font-size: 57;
     -fx-font-weight: bold;
 }
 

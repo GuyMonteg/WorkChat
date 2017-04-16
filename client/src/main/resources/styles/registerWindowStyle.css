@@ -1,6 +1,9 @@
+@font-face {
+    src: url("../fonts/TitilliumWeb-SemiBold.ttf");
+}
+
 .root
 {
-    -fx-font-family      : sans-serif;
     -fx-background-color : #295988;
 }
 

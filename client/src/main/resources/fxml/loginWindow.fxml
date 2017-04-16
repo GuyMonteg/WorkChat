@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import java.net.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -11,7 +12,7 @@
       <URL value="@../styles/loginWindowStyle.css" />
    </stylesheets>
    <children>
-      <Button fx:id="loginIn" layoutX="559.0" layoutY="340.0" mnemonicParsing="false" onAction="#whenClickedLogin" onKeyPressed="#enterPressed" prefHeight="47.0" prefWidth="147.0" styleClass="button-login" text="Sing in">
+      <Button fx:id="loginIn" layoutX="559.0" layoutY="340.0" mnemonicParsing="false" onAction="#whenClickedLogin" onKeyPressed="#enterPressed" prefHeight="45.0" prefWidth="147.0" styleClass="button-login" text="Sing in">
          <font>
             <Font name="Times New Roman Bold" size="21.0" />
          </font></Button>
@@ -47,7 +48,7 @@
             <Font name="Ebrima Bold" size="72.0" />
          </font>
       </Label>
-      <ImageView fitHeight="116.0" fitWidth="119.0" layoutX="380.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="116.0" fitWidth="119.0" layoutX="365.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/chat_image.png" />
          </image>
