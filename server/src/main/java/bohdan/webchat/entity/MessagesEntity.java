@@ -7,17 +7,25 @@ import java.sql.Date;
  */
 
 public class MessagesEntity {
+    private int m_id;
     private String author;
     private String messageText;
-    private Date date;
-    //private LocalDateTime date;
+    private String date;
 
     public MessagesEntity() {}
 
-    public MessagesEntity(String author, String messageText, Date date) {
+    public MessagesEntity(String author, String messageText, String date) {
         this.author = author;
         this.messageText = messageText;
         this.date = date;
+    }
+
+    public int getM_id() {
+        return m_id;
+    }
+
+    public void setM_id(int m_id) {
+        this.m_id = m_id;
     }
 
     public String getAuthor() {
@@ -36,11 +44,11 @@ public class MessagesEntity {
         this.messageText = messageText;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

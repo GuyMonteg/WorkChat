@@ -4,6 +4,7 @@ package bohdan.webchat.entity;
  * Created by Monteg on 15.03.2017.
  */
 public class UsersEntity {
+    private int id;
     private String userName;
     private String password;
     private String email;
@@ -15,10 +16,24 @@ public class UsersEntity {
         this.userName = userName;
     }
 
-    public UsersEntity(String userName, String password, String email) {
+    public UsersEntity(int id, String userName) {
+        this.id = id;
+        this.userName = userName;
+    }
+
+    public UsersEntity(int id, String userName, String password, String email) {
+        this.id = id;
         this.userName = userName;
         this.password = password;
         this.email = email;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUserName() {
@@ -48,7 +63,8 @@ public class UsersEntity {
     @Override
     public String toString() {
         return "UsersEntity{" +
-                "userName='" + userName + '\'' +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 '}';

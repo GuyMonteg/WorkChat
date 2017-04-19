@@ -26,9 +26,10 @@ public class UserDAO {
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
                 UsersEntity ue = new UsersEntity();
-                ue.setUserName(rs.getString(1));
-                ue.setPassword(rs.getString(2));
-                ue.setEmail(rs.getString(3));
+                ue.setId(rs.getInt("user_id"));
+                ue.setUserName(rs.getString("user_name"));
+                ue.setPassword(rs.getString("password"));
+                ue.setEmail(rs.getString("email"));
                 return ue;
             }
         } catch (SQLException ex) {
@@ -52,7 +53,7 @@ public class UserDAO {
     }
 
     public static void addNewUser(UsersEntity utd) {
-        String inToDB = "INSERT INTO users VALUES (?, ?, ?)";
+        String inToDB = "INSERT INTO users(user_name, password, email) VALUES (?, ?, ?)";
         Connection conn = getDBConnections();
 
         try (PreparedStatement ps = conn.prepareStatement(inToDB)) {

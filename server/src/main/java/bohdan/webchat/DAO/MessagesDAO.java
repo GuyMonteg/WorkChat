@@ -16,13 +16,14 @@ import java.sql.*;
 public class MessagesDAO {
 
     public static void addMessages(MessageBean mtd) {
-        String inToDB = "INSERT INTO messages VALUES (?, ?, ?)";
+        String inToDB = "INSERT INTO messages VALUES (?, ?, ?, ?)";
         Connection conn = getDBConnections();
 
         try (PreparedStatement ps = conn.prepareStatement(inToDB)) {
-            ps.setString(1, mtd.getAuthor());
-            ps.setString(2, mtd.getMessageText());
-            ps.setDate(3, mtd.getDate());
+            ps.setInt(1, mtd.getId());
+            ps.setString(2, mtd.getAuthor());
+            ps.setString(3, mtd.getMessageText());
+            ps.setString(4, mtd.getDate());
             ps.executeUpdate();
             System.out.println("Insert of message is OK");
         } catch (SQLException ex) {
@@ -59,9 +60,10 @@ public class MessagesDAO {
         try (PreparedStatement ps = conn.prepareStatement(z2)) {
             rs = ps.executeQuery();
             while (rs.next()) {
+                int id = rs.getInt("m_id");
                 String authorM = rs.getString("author");
                 String  messageT = rs.getString("mesage_text");
-                Date time = rs.getDate("message_time");
+                String time = rs.getString("message_time");
                 messageList.add(new MessagesEntity(authorM, messageT, time));
             }
         } catch (SQLException e) {

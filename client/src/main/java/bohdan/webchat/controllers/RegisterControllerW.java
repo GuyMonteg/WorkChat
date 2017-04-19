@@ -60,6 +60,8 @@ public class RegisterControllerW {
                                 alert.setTitle("Registration status");
                                 alert.setHeaderText(null);
                                 alert.setContentText("Registration was successful, \nwe will send you email with logins");
+                                DialogPane dialogPane = alert.getDialogPane();
+                                dialogPane.getStylesheets().add("styles/connWindowStyle.css");
                                 alert.showAndWait();
                             }
                             else if (rr.getStatus().equals(ConnectingStatus.EXIST)) {

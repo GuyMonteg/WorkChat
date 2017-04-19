@@ -68,14 +68,6 @@ public class SettingsBar {
         }
     }
 
-    public void changeResponce() {
-    /*Придет ли респонс в этот контроллер, скорее всего
-        его получит UserWController так ка он непрерывно читает,
-        как в таком случае вывести уведомление об успешном изменеии,
-        может через тот же Alert?
-        */
-    }
-
     public void changeNotific() {
         if (notific == true) {
 

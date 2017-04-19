@@ -28,6 +28,9 @@ import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -61,12 +64,15 @@ public class UserWController implements Initializable{
     public void buttonSended() {
         if (!message.getText().isEmpty()) {
             try {
-                MessageBean messageRequest = new MessageBean();
-                messageRequest.setAuthor(Data.getName());
-                messageRequest.setMessageText(message.getText());
-                messageRequest.setDate(Date.valueOf(LocalDate.now()));
+                MessageBean messageBean = new MessageBean();
+                messageBean.setId(Data.getiD());
+                messageBean.setAuthor(Data.getName());
+                messageBean.setMessageText(message.getText());
+                messageBean.setDate(LocalDateTime.now().
+                        format(DateTimeFormatter.
+                                ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT)));
                 ObjectOutputStream outputStream = Main.writeStream;
-                outputStream.writeObject(messageRequest);
+                outputStream.writeObject(messageBean);
                 outputStream.flush();
                 message.clear();
                 message.requestFocus();
@@ -93,30 +99,39 @@ public class UserWController implements Initializable{
                     }
                     if (obj instanceof MessageListBean) {
                         MessageListBean mlb = (MessageListBean) obj;
-                        ArrayList<MessageBean> listM = mlb.getList();
-                        for (MessageBean m : listM) {
-                            textArea.appendText(m.toString() + "\n");
-                        }
+                        Platform.runLater(() -> {
+                            ArrayList<MessageBean> listM = mlb.getList();
+                            for (MessageBean m : listM) {
+                                textArea.appendText(m.toString() + "\n");
+                            }
+                        });
                     }
                     if (obj instanceof UserListBean) {
                         UserListBean ub = (UserListBean) obj;
-                        obListOfUsers = FXCollections.observableArrayList(ub.getList());
-                        listView.setItems(obListOfUsers);
-                        listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+                        Platform.runLater(() -> {
+                            obListOfUsers = FXCollections.observableArrayList(ub.getList());
+                            listView.setItems(obListOfUsers);
+                            listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+                        });
                         //listView.setCellFactory(new PropertyValueFactory<String,>());
                     }
                     if (obj instanceof RenameResponce) {
                         RenameResponce rr = (RenameResponce) obj;
-                        System.out.println(rr.getStatus());
-                        /*Alert alert = new Alert(Alert.AlertType.INFORMATION); //почему не работает Alert?
-                        alert.setTitle("Rename result");
-                        alert.setHeaderText(null);
-                        if (rr.getStatus() == ConnectingStatus.OK) {
-                            alert.setContentText("Rename was successful!");
-                        } else {
-                            alert.setContentText("Rename failed!");
-                        }
-                        alert.showAndWait();*/
+                        Platform.runLater(() -> {
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Operation result");
+                            alert.setHeaderText(null);
+                            if (rr.getStatus() == ConnectingStatus.OK) {
+                                userStatus.setText(rr.getNewName());
+                                Data.setName(rr.getNewName());
+                                alert.setContentText("Changes was successful!");
+                            } else {
+                                alert.setContentText("Mission failed!");
+                            }
+                            DialogPane dialogPane = alert.getDialogPane();
+                            dialogPane.getStylesheets().add("styles/connWindowStyle.css");
+                            alert.showAndWait();
+                        });
                     }
                 } catch (IOException | ClassNotFoundException e) {
                     e.printStackTrace();

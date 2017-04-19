@@ -8,16 +8,25 @@ import java.sql.Date;
  */
 
 public class MessageBean implements Serializable {
+    private int id;
     private String author;
     private String messageText;
-    private Date date;
+    private String date;
 
     public MessageBean() {}
 
-    public MessageBean(String author, String messageText, Date date) {
+    public MessageBean(String author, String messageText, String date) {
         this.author = author;
         this.messageText = messageText;
         this.date = date;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getAuthor() {
@@ -36,11 +45,11 @@ public class MessageBean implements Serializable {
         this.messageText = messageText;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

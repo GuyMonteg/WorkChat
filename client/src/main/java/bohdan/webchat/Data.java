@@ -7,6 +7,7 @@ public class Data {
     public static String host = "127.0.0.1";      // = "127.0.0.1"
     public static int port = 7707;         // = 7707
     private static String name;
+    private static int iD;
 
     public static String getName() {
         return name;
@@ -14,6 +15,14 @@ public class Data {
 
     public static void setName(String name) {
         Data.name = name;
+    }
+
+    public static int getiD() {
+        return iD;
+    }
+
+    public static void setiD(int iD) {
+        Data.iD = iD;
     }
 
     /*public static String getHost() {

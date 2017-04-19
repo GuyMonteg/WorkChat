@@ -9,6 +9,7 @@ import java.io.Serializable;
  */
 public class LoginResponse implements Serializable{
     private ConnectingStatus status;
+    private int id;
 
     public LoginResponse() { }
 
@@ -20,10 +21,19 @@ public class LoginResponse implements Serializable{
         this.status = status;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "LoginResponse{" +
                 "status=" + status +
+                ", id=" + id +
                 '}';
     }
 }

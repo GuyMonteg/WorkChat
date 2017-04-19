@@ -44,6 +44,7 @@ public class LoginController {
                         LoginResponse lr = receiveObject();
 
                         if (lr.getStatus().equals(ConnectingStatus.OK)) {
+                            Data.setiD(lr.getId());
                             mainWload();
                         }
                         if (lr.getStatus().equals(ConnectingStatus.WRONGNAME)) {

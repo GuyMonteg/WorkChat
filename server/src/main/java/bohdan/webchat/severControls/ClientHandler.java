@@ -100,6 +100,7 @@ public class ClientHandler extends Thread {
         UserRename rename = (UserRename) obj;
         boolean verify = userRename(rename);
         if (verify == true) {
+            renameResponce.setNewName(rename.getNewName());
             renameResponce.setStatus(ConnectingStatus.OK);
         } else {
             renameResponce.setStatus(ConnectingStatus.FAIL);
@@ -133,6 +134,7 @@ public class ClientHandler extends Thread {
         UsersEntity user = findUserByName(loginRequest.getUsername());
         if (user != null) {
             if (user.getPassword().equals(loginRequest.getUserpassword())) {
+                loginResponse.setId(user.getId());
                 loginResponse.setStatus(ConnectingStatus.OK);
                 System.out.println(loginResponse.getStatus());
             } else {
