@@ -3,7 +3,9 @@ package bohdan.webchat.DAO;
 import static bohdan.webchat.severControls.DBConnection.getDBConnections;
 
 import bohdan.webchat.entity.MessagesEntity;
+import bohdan.webchat.entity.UsersEntity;
 import bohdan.webchat.messageBeans.MessageBean;
+import bohdan.webchat.userBeans.UserDelete;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,5 +72,21 @@ public class MessagesDAO {
             System.out.println(e.getMessage());
         }
         return messageList;
+    }
+
+    public static boolean deleteMessagesByUser(UsersEntity name) {
+        boolean result = false;
+        String inToDB = "DELETE FROM messages WHERE author = ?;";
+        Connection conn = getDBConnections();
+
+        try(PreparedStatement ps = conn.prepareStatement(inToDB)) {
+            ps.setString(1, name.getUserName());
+            ps.executeUpdate();
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            result = false;
+        }
+        return result;
     }
 }

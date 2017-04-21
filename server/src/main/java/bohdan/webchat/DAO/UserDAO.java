@@ -107,7 +107,7 @@ public class UserDAO {
         return result;
     }
 
-    public static void deleteFromDB(UsersEntity name) {
+    public static void deleteUserFromDB(UsersEntity name) {
         String inToDB = "DELETE FROM users WHERE user_name = ?;"; // нужно ли после делейт *,
         Connection dbConn = getDBConnections();                  // удалять ли и сообщения этого пользователя
         try (PreparedStatement ps = dbConn.prepareStatement(inToDB)) {

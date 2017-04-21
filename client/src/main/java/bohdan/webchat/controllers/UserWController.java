@@ -8,6 +8,7 @@ import bohdan.webchat.messageBeans.MessageListBean;
 import bohdan.webchat.userBeans.RenameResponce;
 import bohdan.webchat.userBeans.UserBean;
 import bohdan.webchat.userBeans.UserListBean;
+import bohdan.webchat.userBeans.UserNotificationBean;
 import com.jfoenix.controls.JFXDrawer;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -97,6 +98,12 @@ public class UserWController implements Initializable{
                         textArea.appendText(mb.toString() + "\n");
                         System.out.println("in receiveM " + mb.toString());
                     }
+                    if (obj instanceof UserNotificationBean) {
+                        UserNotificationBean unb = (UserNotificationBean) obj;
+                        Platform.runLater(() -> {
+                            textArea.appendText(unb.getConnectionStatus() + "\n");
+                        });
+                    }
                     if (obj instanceof MessageListBean) {
                         MessageListBean mlb = (MessageListBean) obj;
                         Platform.runLater(() -> {
@@ -150,8 +157,18 @@ public class UserWController implements Initializable{
 
     @FXML
     public void logOutMainW() {
-        Platform.exit();
-        System.exit(0);
+        UserNotificationBean unb = new UserNotificationBean();
+        unb.setConnectionStatus(Data.getName() + " is disconnected.");
+        ObjectOutputStream outputStream = Main.writeStream;
+        try {
+            outputStream.writeObject(unb);
+            outputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            Platform.exit();
+            System.exit(0);
+        }
     }
 
     @FXML

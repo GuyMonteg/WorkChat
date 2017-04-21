@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import static bohdan.webchat.DAO.MessagesDAO.addMessages;
+import static bohdan.webchat.DAO.MessagesDAO.deleteMessagesByUser;
 import static bohdan.webchat.DAO.MessagesDAO.getMessagesByDate;
 import static bohdan.webchat.DAO.UserDAO.*;
 import static bohdan.webchat.severControls.ChatServer.writers;
@@ -72,6 +73,10 @@ public class ClientHandler extends Thread {
                     addMessages(msg);
                     System.out.println(msg.toString());
                 }
+                if (obj instanceof UserNotificationBean) {
+                    UserNotificationBean unb = (UserNotificationBean) obj;
+                    notifConnectOrDisconnect(unb);
+                }
                 if (obj instanceof UserRename) {
                     RenameResponce rename = renameUser();
                     objectOutputS.writeObject(rename);
@@ -92,7 +97,10 @@ public class ClientHandler extends Thread {
         UserDelete delete = (UserDelete) obj;
         UsersEntity entity = new UsersEntity();
         entity.setUserName(delete.getUsername());
-        deleteFromDB(entity);
+        boolean result = deleteMessagesByUser(entity);
+        if (result == true){
+        deleteUserFromDB(entity);
+        }
     }
 
     public RenameResponce renameUser() {
@@ -136,6 +144,8 @@ public class ClientHandler extends Thread {
             if (user.getPassword().equals(loginRequest.getUserpassword())) {
                 loginResponse.setId(user.getId());
                 loginResponse.setStatus(ConnectingStatus.OK);
+                //notifConnectOrDisconnect(new UserNotificationBean(loginRequest.getUsername() +
+                  //      " connected to chat."));
                 System.out.println(loginResponse.getStatus());
             } else {
                 loginResponse.setStatus(ConnectingStatus.WRONGPASS);
@@ -152,6 +162,19 @@ public class ClientHandler extends Thread {
             try {
                 ObjectOutputStream out = iter.next();
                 out.writeObject(msg);
+                out.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void notifConnectOrDisconnect(UserNotificationBean unb) {
+        Iterator<ObjectOutputStream> iter = writers.iterator();
+        while (iter.hasNext()) {
+            try {
+                ObjectOutputStream out = iter.next();
+                out.writeObject(unb);
                 out.flush();
             } catch (IOException e) {
                 e.printStackTrace();
