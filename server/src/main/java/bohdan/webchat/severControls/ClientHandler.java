@@ -144,8 +144,6 @@ public class ClientHandler extends Thread {
             if (user.getPassword().equals(loginRequest.getUserpassword())) {
                 loginResponse.setId(user.getId());
                 loginResponse.setStatus(ConnectingStatus.OK);
-                //notifConnectOrDisconnect(new UserNotificationBean(loginRequest.getUsername() +
-                  //      " connected to chat."));
                 System.out.println(loginResponse.getStatus());
             } else {
                 loginResponse.setStatus(ConnectingStatus.WRONGPASS);

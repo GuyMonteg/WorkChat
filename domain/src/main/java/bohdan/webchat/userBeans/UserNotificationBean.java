@@ -1,30 +1,41 @@
 package bohdan.webchat.userBeans;
 
+import bohdan.webchat.ConnectingStatus;
+
 import java.io.Serializable;
 
 /**
  * Created by Monteg on 20.04.2017.
  */
 public class UserNotificationBean implements Serializable {
-    private String connectionStatus;
+    private String name;
+    private ConnectingStatus status;
 
     public UserNotificationBean() {
     }
 
-    public UserNotificationBean(String connectionStatus) {
-        this.connectionStatus = connectionStatus;
+    public UserNotificationBean(String name) {
+        this.name = name;
     }
 
-    public String getConnectionStatus() {
-        return connectionStatus;
+    public String getName() {
+        return name;
     }
 
-    public void setConnectionStatus(String connectionStatus) {
-        this.connectionStatus = connectionStatus;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ConnectingStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ConnectingStatus status) {
+        this.status = status;
     }
 
     @Override
     public String toString() {
-        return connectionStatus;
+        return "Name" + name + "\n" + "status" + status;
     }
 }

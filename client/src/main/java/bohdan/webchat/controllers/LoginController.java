@@ -104,6 +104,7 @@ public class LoginController {
     }
 
     public void mainWload() {
+        Data.setName(name.getText());
         Stage stage;
         stage = (Stage) (name.getScene().getWindow());
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/userWindow.fxml"));
@@ -117,7 +118,6 @@ public class LoginController {
 
         UserWController usernameC = loader.getController();     //take user name and put it in main window
         usernameC.setUserStatus(name.getText());
-        Data.setName(name.getText());
 
         Scene scena = new Scene(userW, 1280.0, 768.0);
         stage.setScene(scena);
