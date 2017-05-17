@@ -17,6 +17,7 @@ public class ChatServer {
     public static Set<ObjectOutputStream> writers;
 
     public ChatServer() {
+        
         setOfConnections = Collections.synchronizedSet(new HashSet<ClientHandler>(100));
         writers = Collections.synchronizedSet(new HashSet<ObjectOutputStream>(100));
     }
