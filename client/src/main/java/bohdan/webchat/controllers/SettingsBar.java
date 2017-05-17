@@ -1,22 +1,16 @@
 package bohdan.webchat.controllers;
 
-import bohdan.webchat.ConnectingStatus;
 import bohdan.webchat.Data;
 import bohdan.webchat.Main;
-import bohdan.webchat.userBeans.RenameResponce;
-import bohdan.webchat.userBeans.UserBean;
-import bohdan.webchat.userBeans.UserDelete;
-import bohdan.webchat.userBeans.UserRename;
+import bohdan.webchat.user.UserDelete;
+import bohdan.webchat.user.UserRename;
 import com.jfoenix.controls.JFXToggleButton;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 
 import java.awt.*;
 import java.io.IOException;

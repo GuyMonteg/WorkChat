@@ -1,4 +1,4 @@
-package bohdan.webchat.loginBeans;
+package bohdan.webchat.login;
 
 import bohdan.webchat.ConnectingStatus;
 

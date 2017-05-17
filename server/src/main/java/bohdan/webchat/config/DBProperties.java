@@ -1,6 +1,6 @@
 package bohdan.webchat.config;
 
-import bohdan.webchat.severControls.ChatServer;
+import bohdan.webchat.sever.ChatServer;
 
 import java.io.IOException;
 import java.io.InputStream;

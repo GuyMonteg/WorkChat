@@ -1,4 +1,4 @@
-package bohdan.webchat.severControls;
+package bohdan.webchat.DAO;
 
 import bohdan.webchat.config.DBProperties;
 import java.sql.*;
@@ -25,11 +25,7 @@ public class DBConnection {
     }
 
     public static Connection getDBConnections() {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-        }
+        /*try { Class.forName("com.mysql.jdbc.Driver");} catch (ClassNotFoundException ex) {ex.printStackTrace();}*/
         try {
             if (connection == null || connection.isClosed()) {
                 return connection = DriverManager.getConnection(DBProperties.URL,

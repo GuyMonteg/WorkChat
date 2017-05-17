@@ -1,10 +1,8 @@
 package bohdan.webchat.DAO;
 
-import static bohdan.webchat.severControls.DBConnection.getDBConnections;
+import static bohdan.webchat.DAO.DBConnection.getDBConnections;
 import bohdan.webchat.entity.UsersEntity;
-import bohdan.webchat.userBeans.UserBean;
-import bohdan.webchat.userBeans.UserDelete;
-import bohdan.webchat.userBeans.UserRename;
+import bohdan.webchat.user.UserRename;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -38,7 +36,7 @@ public class UserDAO {
         return null;
     }
 
-    public static boolean userRegisterControl(String name) {
+    public static boolean userRegistrationCheck(String name) {
         String inToDB = "SELECT user_name, password FROM users WHERE user_name = ?;";
         Connection conn = getDBConnections();
         boolean result = false;
@@ -108,8 +106,8 @@ public class UserDAO {
     }
 
     public static void deleteUserFromDB(UsersEntity name) {
-        String inToDB = "DELETE FROM users WHERE user_name = ?;"; // нужно ли после делейт *,
-        Connection dbConn = getDBConnections();                  // удалять ли и сообщения этого пользователя
+        String inToDB = "DELETE FROM users WHERE user_name = ?;";
+        Connection dbConn = getDBConnections();                  // удалять ли сообщения этого пользователя
         try (PreparedStatement ps = dbConn.prepareStatement(inToDB)) {
             ps.setString(1, name.getUserName());
             ps.executeUpdate();

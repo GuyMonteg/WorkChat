@@ -1,15 +1,15 @@
-package bohdan.webchat.severControls;
+package bohdan.webchat.sever;
 
 import bohdan.webchat.*;
 import bohdan.webchat.entity.MessagesEntity;
 import bohdan.webchat.entity.UsersEntity;
-import bohdan.webchat.loginBeans.LoginRequest;
-import bohdan.webchat.loginBeans.LoginResponse;
-import bohdan.webchat.messageBeans.MessageBean;
-import bohdan.webchat.messageBeans.MessageListBean;
-import bohdan.webchat.registrationnBeans.RegistrationRequest;
-import bohdan.webchat.registrationnBeans.RegistrationResponse;
-import bohdan.webchat.userBeans.*;
+import bohdan.webchat.login.LoginRequest;
+import bohdan.webchat.login.LoginResponse;
+import bohdan.webchat.message.MessageBean;
+import bohdan.webchat.message.MessageListBean;
+import bohdan.webchat.registrationn.RegistrationRequest;
+import bohdan.webchat.registrationn.RegistrationResponse;
+import bohdan.webchat.user.*;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -22,7 +22,7 @@ import static bohdan.webchat.DAO.MessagesDAO.addMessages;
 import static bohdan.webchat.DAO.MessagesDAO.deleteMessagesByUser;
 import static bohdan.webchat.DAO.MessagesDAO.getMessagesByDate;
 import static bohdan.webchat.DAO.UserDAO.*;
-import static bohdan.webchat.severControls.ChatServer.writers;
+import static bohdan.webchat.sever.ChatServer.writers;
 
 /**
  * Created by Monteg on 24.03.2017.
@@ -32,7 +32,6 @@ public class ClientHandler extends Thread {
     private Socket socket;
     private ObjectOutputStream objectOutputS;
     private ObjectInputStream objectInputS;
-    private Object obj = null;
 
     public ClientHandler(Socket socket) {
         this.socket = socket;
@@ -50,19 +49,19 @@ public class ClientHandler extends Thread {
         System.out.println("new socked connected");
         try {
             while (true) {
-                obj = objectInputS.readObject();
+                Object obj = objectInputS.readObject();
                 if (obj instanceof LoginRequest) {
-                    LoginResponse response = userIdentification();
+                    LoginResponse response = userIdentification(obj);
                     objectOutputS.writeObject(response);
                     objectOutputS.flush();
                     System.out.println(response.toString() + "в ране");
                     if (response.getStatus().equals(ConnectingStatus.OK)) {
-                        viewMessagesList();                                 //try to get list of old messages
+                        viewMessagesList();
                         viewUsersList();
                     }
                 }
                 if (obj instanceof RegistrationRequest) {
-                    RegistrationResponse registresponse = userRegistration();
+                    RegistrationResponse registresponse = userRegistration(obj);
                     System.out.println(registresponse.toString());
                     objectOutputS.writeObject(registresponse);
                     objectOutputS.flush();
@@ -78,12 +77,12 @@ public class ClientHandler extends Thread {
                     notifConnectOrDisconnect(unb);
                 }
                 if (obj instanceof UserRename) {
-                    RenameResponce rename = renameUser();
+                    RenameResponce rename = renameUser(obj);
                     objectOutputS.writeObject(rename);
                     objectOutputS.flush();
                 }
                 if (obj instanceof UserDelete) {
-                    deleteUser();
+                    deleteUser(obj);
                 }
             }
         } catch (IOException e) {
@@ -93,7 +92,7 @@ public class ClientHandler extends Thread {
         }
     }
 
-    public void deleteUser() {
+    public void deleteUser(Object obj) {
         UserDelete delete = (UserDelete) obj;
         UsersEntity entity = new UsersEntity();
         entity.setUserName(delete.getUsername());
@@ -103,7 +102,7 @@ public class ClientHandler extends Thread {
         }
     }
 
-    public RenameResponce renameUser() {
+    public RenameResponce renameUser(Object obj) {
         RenameResponce renameResponce = new RenameResponce();
         UserRename rename = (UserRename) obj;
         boolean verify = userRename(rename);
@@ -116,11 +115,11 @@ public class ClientHandler extends Thread {
         return renameResponce;
     }
 
-    public RegistrationResponse userRegistration() {
+    public RegistrationResponse userRegistration(Object obj) {
         RegistrationResponse registrationResp = new RegistrationResponse();
         RegistrationRequest registrationReq = (RegistrationRequest) obj;
         System.out.println(registrationReq.toString());
-        boolean verificationOf = userRegisterControl(registrationReq.getUsername());
+        boolean verificationOf = userRegistrationCheck(registrationReq.getUsername());
         System.out.println(verificationOf);
         if (verificationOf == false) {
             UsersEntity usersEntity = new UsersEntity();
@@ -135,7 +134,7 @@ public class ClientHandler extends Thread {
         return registrationResp;
     }
 
-    public LoginResponse userIdentification() {
+    public LoginResponse userIdentification(Object obj) {
         LoginResponse loginResponse = new LoginResponse();
         LoginRequest loginRequest = (LoginRequest) obj;
         System.out.println(loginRequest.toString());
@@ -182,12 +181,10 @@ public class ClientHandler extends Thread {
 
     public void viewMessagesList() {
         ArrayList<MessagesEntity> list = getMessagesByDate();
-        ArrayList<MessageBean> mlist = new ArrayList<>();
         MessageListBean listbean = new MessageListBean();
         for (MessagesEntity me : list) {
-            mlist.add(new MessageBean(me.getAuthor(), me.getMessageText(), me.getDate()));
+            listbean.getList().add(new MessageBean(me.getAuthor(), me.getMessageText(), me.getDate()));
         }
-        listbean.setList(mlist);
         try {
             objectOutputS.writeObject(listbean);
             objectOutputS.flush();
@@ -198,12 +195,10 @@ public class ClientHandler extends Thread {
 
     public void viewUsersList() {
         ArrayList<UsersEntity> list = getUsersList();
-        ArrayList<UserBean> userBeans = new ArrayList<>();
         UserListBean uList = new UserListBean();
         for (UsersEntity ue : list) {
-            userBeans.add(new UserBean(ue.getUserName()));
+            uList.getList().add(new UserBean(ue.getUserName()));
         }
-        uList.setList(userBeans);
         try {
             objectOutputS.writeObject(uList);
             objectOutputS.flush();

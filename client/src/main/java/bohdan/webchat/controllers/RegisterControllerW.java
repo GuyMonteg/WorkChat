@@ -2,8 +2,8 @@ package bohdan.webchat.controllers;
 
 import bohdan.webchat.ConnectingStatus;
 import bohdan.webchat.Main;
-import bohdan.webchat.registrationnBeans.RegistrationRequest;
-import bohdan.webchat.registrationnBeans.RegistrationResponse;
+import bohdan.webchat.registrationn.RegistrationRequest;
+import bohdan.webchat.registrationn.RegistrationResponse;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;

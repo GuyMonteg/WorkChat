@@ -1,4 +1,4 @@
-package bohdan.webchat.messageBeans;
+package bohdan.webchat.message;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * Created by Monteg on 10.04.2017.
  */
 public class MessageListBean implements Serializable {
-    private ArrayList<MessageBean> list;
+    private ArrayList<MessageBean> list = new ArrayList<MessageBean>();
 
     public MessageListBean() {
     }
@@ -18,10 +18,6 @@ public class MessageListBean implements Serializable {
 
     public ArrayList<MessageBean> getList() {
         return list;
-    }
-
-    public void setList(ArrayList<MessageBean> list) {
-        this.list = list;
     }
 
     @Override

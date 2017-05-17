@@ -1,4 +1,4 @@
-package bohdan.webchat.userBeans;
+package bohdan.webchat.user;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * Created by Monteg on 07.04.2017.
  */
 public class UserListBean implements Serializable {
-    private ArrayList<UserBean> list;
+    private ArrayList<UserBean> list = new ArrayList<UserBean>();
 
     public UserListBean() { }
 
@@ -17,10 +17,6 @@ public class UserListBean implements Serializable {
 
     public ArrayList<UserBean> getList() {
         return list;
-    }
-
-    public void setList(ArrayList<UserBean> list) {
-        this.list = list;
     }
 
     @Override

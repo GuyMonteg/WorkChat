@@ -1,11 +1,10 @@
 package bohdan.webchat.DAO;
 
-import static bohdan.webchat.severControls.DBConnection.getDBConnections;
+import static bohdan.webchat.DAO.DBConnection.getDBConnections;
 
 import bohdan.webchat.entity.MessagesEntity;
 import bohdan.webchat.entity.UsersEntity;
-import bohdan.webchat.messageBeans.MessageBean;
-import bohdan.webchat.userBeans.UserDelete;
+import bohdan.webchat.message.MessageBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,8 +54,7 @@ public class MessagesDAO {
     public static ArrayList<MessagesEntity> getMessagesByDate() {
         ArrayList<MessagesEntity> messageList = new ArrayList<>();
         Connection conn = getDBConnections();
-        //String z2 = "SELECT * FROM messages WHERE message_time = " + date;
-        String z2 = "SELECT * FROM messages";    //Дописать что бы последних 20 сообщ
+        String z2 = "SELECT * FROM messages ORDER BY message_time LIMIT 20";
         ResultSet rs = null;
 
         try (PreparedStatement ps = conn.prepareStatement(z2)) {

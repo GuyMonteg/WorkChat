@@ -1,4 +1,4 @@
-package bohdan.webchat.userBeans;
+package bohdan.webchat.user;
 
 import bohdan.webchat.ConnectingStatus;
 

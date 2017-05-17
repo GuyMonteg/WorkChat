@@ -1,8 +1,8 @@
 package bohdan.webchat.controllers;
 
 import bohdan.webchat.*;
-import bohdan.webchat.loginBeans.LoginRequest;
-import bohdan.webchat.loginBeans.LoginResponse;
+import bohdan.webchat.login.LoginRequest;
+import bohdan.webchat.login.LoginResponse;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

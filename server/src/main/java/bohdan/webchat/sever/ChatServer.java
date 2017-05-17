@@ -1,4 +1,4 @@
-package bohdan.webchat.severControls;
+package bohdan.webchat.sever;
 
 import bohdan.webchat.config.DBProperties;
 import org.flywaydb.core.Flyway;

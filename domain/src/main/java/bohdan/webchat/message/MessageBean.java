@@ -1,7 +1,6 @@
-package bohdan.webchat.messageBeans;
+package bohdan.webchat.message;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 /**
  * Created by Monteg on 31.03.2017.

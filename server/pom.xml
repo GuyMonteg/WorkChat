@@ -43,7 +43,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>bohdan.webchat.severControls.ChatServer</mainClass>
+                            <mainClass>bohdan.webchat.sever.ChatServer</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -58,7 +58,7 @@
                     </descriptorRefs>
                     <archive>
                       <manifest>
-                        <mainClass>bohdan.webchat.severControls.ChatServer</mainClass>
+                        <mainClass>bohdan.webchat.sever.ChatServer</mainClass>
                       </manifest>
                     </archive>
                 </configuration>
