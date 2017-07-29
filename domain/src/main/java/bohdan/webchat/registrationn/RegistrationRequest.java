@@ -1,6 +1,7 @@
 package bohdan.webchat.registrationn;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Created by Monteg on 24.03.2017.
